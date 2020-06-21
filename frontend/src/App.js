@@ -11,12 +11,12 @@ function App() {
           Are you ready for this?
         </p>
         <a
-          className="App-link"
+          className="nes-btn"
           href="https://reactjs.org"
           target="_blank"
           rel="noopener noreferrer"
         >
-          Learn React
+          Start!
         </a>
       </header>
     </div>

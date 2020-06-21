@@ -3,6 +3,8 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
+import "./nes.css/css/nes.min.css";
+import "./nes.css/fonts/press-start-2p.css"
 
 ReactDOM.render(
   <React.StrictMode>
