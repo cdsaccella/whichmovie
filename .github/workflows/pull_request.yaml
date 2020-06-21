@@ -1,6 +1,8 @@
-name: Build on push
+name: Build on pull request
 on:
-  push:
+  pull_request:
+    branches:
+      - master
     paths-ignore:
       - ".github/**"
 jobs:
@@ -22,5 +24,5 @@ jobs:
         env:
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
-        run: npx netlify-cli deploy --dir=build --prod
+        run: npx netlify-cli deploy --dir=build
         working-directory: frontend
