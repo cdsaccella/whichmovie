@@ -7,14 +7,14 @@ function App() {
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        <p>Are you ready for this game?</p>
+        <p>Are you ready for this?</p>
         <a
           className="nes-btn"
           href="https://reactjs.org"
           target="_blank"
           rel="noopener noreferrer"
         >
-          Start!
+          Let's go
         </a>
       </header>
     </div>
