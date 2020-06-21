@@ -1,0 +1,28 @@
+name: Build on pull request
+on:
+  pull_request:
+    branches:
+      - master
+    paths-ignore:
+      - ".github/**"
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v1
+      - name: Install
+        run: yarn install
+        working-directory: frontend
+      - name: Tests
+        run: yarn test
+        working-directory: frontend
+      - name: Build
+        run: yarn build
+        working-directory: frontend
+      - name: Deploy
+        env:
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+        run: npx netlify-cli deploy --dir=build
+        working-directory: frontend
