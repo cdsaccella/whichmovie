@@ -1,0 +1,15 @@
+name: Build on push
+on:
+  push:
+    paths-ignore:
+      - ".github/**"
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Clonar y checkout de la rama actual
+        uses: actions/checkout@v1
+      - name: Install
+        run: yarn install
+      - name: Tests
+        run: yarn test
