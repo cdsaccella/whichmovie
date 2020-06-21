@@ -10,17 +10,17 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v1
       - name: Install
-        dir: "frontend"
         run: yarn install
+        working-directory: frontend
       - name: Tests
-        dir: "frontend"
         run: yarn test
+        working-directory: frontend
       - name: Build
-        dir: "frontend"
         run: yarn build
+        working-directory: frontend
       - name: Deploy
-        dir: "frontend"
         env:
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
         run: npx netlify-cli deploy --dir=public --prod
+        working-directory: frontend
