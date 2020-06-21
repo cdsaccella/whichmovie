@@ -7,9 +7,19 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Clonar y checkout de la rama actual
-        uses: actions/checkout@v1
+      - uses: actions/checkout@v1
       - name: Install
-        run: yarn install
+        dir: "frontend"
+        run: "yarn install"
       - name: Tests
-        run: yarn test
+        dir: "frontend"
+        run: "yarn test"
+      - name: "Build"
+        dir: "frontend"
+        run: "yarn build"
+      - name: Deploy
+        dir: "frontend"
+        env:
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+        run: npx netlify-cli deploy --dir=public --prod
