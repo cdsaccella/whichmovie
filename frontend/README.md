@@ -27,6 +27,14 @@ Your app is ready to be deployed!
 
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
+- To test app locally after build
+
+`npx serve build`
+
+- To deploy it on netlify 
+
+`netlify deploy`
+
 ### `yarn eject`
 
 **Note: this is a one-way operation. Once you `eject`, you can’t go back!**
