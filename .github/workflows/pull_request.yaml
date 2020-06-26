@@ -36,3 +36,4 @@ jobs:
       - uses: superfly/flyctl-actions@1.0
         with:
           args: "deploy"
+          working-directory: backend
