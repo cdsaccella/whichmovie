@@ -3,8 +3,8 @@ on:
   push:
     branches:
       - master
-    paths-ignore:
-      - ".github/**"
+    paths:
+      - "frontend"
 jobs:
   build:
     runs-on: ubuntu-latest
