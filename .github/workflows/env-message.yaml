@@ -1,0 +1,15 @@
+name: message
+description: Automatically put a message to show environments
+branding:
+  icon: message-square
+  color: yellow
+on: [pull_request]
+jobs:
+  build:
+    name: hello
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/first-interaction@v1
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          pr-message: "Hey, environments are setting up.\nfrontend: https://5eeecc9f2e59e452b0cffceb--whichmovie.netlify.app \napi:https://whichmovie-dev.fly.dev"
