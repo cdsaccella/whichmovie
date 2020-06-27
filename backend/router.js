@@ -5,7 +5,7 @@ import getMovies from './controllers/movies/get.js';
 const router = new Router();
 
 router.get('/', ({ response }) => {
-    response.body = 'Movies list rest api using deno runtime v2.0';
+    response.body = 'Movies list rest api using deno runtime v3.0';
 });
 
 router
