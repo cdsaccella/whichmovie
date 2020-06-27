@@ -1,7 +1,4 @@
 name: message
-branding:
-  icon: message-square
-  color: yellow
 on:
   pull_request:
     branches:
