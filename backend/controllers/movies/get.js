@@ -1,4 +1,5 @@
 import { FILE_PATH } from '../../config.js';
+import { getRandomMovie } from '../../services/movies/moviesService.js'
 
 export default async ({ response }) => {
     try {
@@ -10,7 +11,7 @@ export default async ({ response }) => {
             },
         });
         const data = await movies.json();
-        response.body = { status: 'success', data };
+        response.body = { status: 'success', data: [getRandomMovie(data)] };
     } catch (error) {
         console.log(error);
         response.status = 500;
