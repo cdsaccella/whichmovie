@@ -1,10 +1,9 @@
-import { FILE_PATH } from '../../config.js';
+import { getPopularMovies, getRandomMovie } from '../../services/movieService.js'
 
 export default async ({ response }) => {
     try {
-        const movies = await Deno.readFile(FILE_PATH);
-        const data = JSON.parse(new TextDecoder().decode(movies));
-        response.body = { status: 'success', data };
+        const data = await getPopularMovies();
+        response.body = { status: 'success', data: [getRandomMovie(data)] };
     } catch (error) {
         console.log(error);
         response.status = 500;
