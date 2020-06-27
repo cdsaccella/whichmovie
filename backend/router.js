@@ -2,6 +2,7 @@ import { Router } from 'https://deno.land/x/oak/mod.ts';
 
 import getMovies from './controllers/movies/get.js';
 import getRiddle from './controllers/riddle/get.js'
+import postRiddle from './controllers/riddle/post.js'
 
 const router = new Router();
 
@@ -11,6 +12,7 @@ router.get('/', ({ response }) => {
 
 router
     .get('/movies', getMovies)
-    .get('/riddles', getRiddle);
+    .get('/riddles', getRiddle)
+    .post("/riddles", postRiddle);
 
 export default router;

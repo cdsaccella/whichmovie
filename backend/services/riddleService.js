@@ -1,6 +1,7 @@
 import { getSimilars } from "./movieService.js";
 import { getPopularMovies } from "./movieService.js";
 import { getResizedImage } from "./imageService.js";
+import { getEncryptedText, assertEncryptedText } from "./cryptoService.js";
 
 const IMAGE_SIZE = 500;
 const OPTIONS_SIZE = 8;
@@ -13,11 +14,16 @@ export const getNewRiddle = async () => {
     let relatedMoviesOptions = [];
     relatedMovies.forEach(movie => relatedMoviesOptions.push(movie.original_title));
     relatedMoviesOptions = shuffleSlice(relatedMoviesOptions, OPTIONS_SIZE - 1);
-    relatedMoviesOptions.push(randomMovie.title);;
+    relatedMoviesOptions.push(randomMovie.title);
     return {
+        riddle: getEncryptedText(randomMovie.original_title),
         image: getResizedImage(randomMovie.backdrop_path, IMAGE_SIZE),
         options: shuffle(relatedMoviesOptions),
     }
+}
+
+export const checkOption = (riddle, option) => {
+    return assertEncryptedText(option, riddle);
 }
 
 export const getFirst = (array) => {
