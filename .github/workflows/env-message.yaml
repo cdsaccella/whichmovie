@@ -3,7 +3,10 @@ description: Automatically put a message to show environments
 branding:
   icon: message-square
   color: yellow
-on: [pull_request]
+on:
+  pull_request:
+    branches:
+      - master
 jobs:
   build:
     name: hello
