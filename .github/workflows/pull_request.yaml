@@ -1,28 +1,40 @@
-name: Build on pull request
+name: dev
 on:
   pull_request:
     branches:
       - master
-    paths-ignore:
-      - ".github/**"
+    paths:
+      - "frontend/**"
+      - "backend/**"
 jobs:
-  build:
+  frontend:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: frontend
     steps:
-      - name: Checkout
+      - name: checkout
         uses: actions/checkout@v1
-      - name: Install
+      - name: instal
         run: yarn install
-        working-directory: frontend
-      - name: Tests
+      - name: tests
         run: yarn test
-        working-directory: frontend
-      - name: Build
+      - name: build
         run: yarn build
-        working-directory: frontend
-      - name: Deploy
+      - name: deploy
         env:
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
         run: npx netlify-cli deploy --dir=build
-        working-directory: frontend
+  backend:
+    name: api deployment
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v2
+      - name: deploy
+        uses: superfly/flyctl-actions@master
+        env:
+          FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
+        with:
+          args: "deploy backend --config fly.dev.toml"
