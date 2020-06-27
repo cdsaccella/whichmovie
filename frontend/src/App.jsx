@@ -3,13 +3,14 @@ import logo from "./logo.svg";
 import "./App.css";
 
 function App() {
+  console.log(
+    `Hey, you are running in ${process.env.REACT_APP_ENV_NAME}. It is ok?`
+  );
+
   return (
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          You are in {process.env.REACT_APP_ENV_NAME} and {process.env.NODE_ENV}
-        </p>
         <p>Are you ready for this CABRONAZO?</p>
         <a
           className="nes-btn"
