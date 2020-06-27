@@ -1,5 +1,4 @@
 name: message
-description: Automatically put a message to show environments
 branding:
   icon: message-square
   color: yellow
