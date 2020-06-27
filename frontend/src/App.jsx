@@ -7,7 +7,9 @@ function App() {
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        <p>You are in {process.env.REACT_APP_ENV_NAME}</p>
+        <p>
+          You are in {process.env.REACT_APP_ENV_NAME} and {process.env.NODE_ENV}
+        </p>
         <p>Are you ready for this CABRONAZO?</p>
         <a
           className="nes-btn"
