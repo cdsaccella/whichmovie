@@ -1,3 +1,17 @@
 .button-container > .nes-btn {
   margin: 20px 10px 0 10px;
 }
+
+.content-wrapper {
+  min-width: 80%;
+}
+
+.image-responsive {
+  margin-top: 10px;
+}
+
+@media only screen and (max-width: 600px) {
+  .content-wrapper {
+    width: 100%;
+  }
+}

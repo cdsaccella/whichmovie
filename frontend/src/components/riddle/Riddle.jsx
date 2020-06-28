@@ -73,7 +73,11 @@ function Riddle(props) {
       {!gameOver && !isLoading && (
         <>
           <Stars stars={counter} maxStars={MAX_POINTS} />
-          <img src={image} alt="Movie"></img>
+          <img
+            className="content-wrapper image-responsive"
+            src={image}
+            alt="Movie"
+          ></img>
           <div className="button-container">
             {options.map((option, index) => (
               <button
