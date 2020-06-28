@@ -42,7 +42,7 @@ function Riddle(props) {
       {isLoading && (
         <progress className="nes-progress" value="90" max="100"></progress>
       )}
-      {!gameOver && !isLoading && <img src={image}></img>}
+      {!gameOver && !isLoading && <img src={image} alt="Movie"></img>}
       {!gameOver &&
         options.map((option, index) => (
           <div key={index} className="nes-field">
