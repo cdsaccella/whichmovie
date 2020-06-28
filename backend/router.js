@@ -1,17 +1,15 @@
 import { Router } from 'https://deno.land/x/oak/mod.ts';
 
-import getMovies from './controllers/movies/get.js';
 import getRiddle from './controllers/riddle/get.js'
 import postRiddle from './controllers/riddle/post.js'
 
 const router = new Router();
 
 router.get('/', ({ response }) => {
-    response.body = 'Movies list rest api using deno runtime v3.0';
+    response.body = 'You shouldn\'t be here, but meh...';
 });
 
 router
-    .get('/movies', getMovies)
     .get('/riddles', getRiddle)
     .post("/riddles", postRiddle);
 

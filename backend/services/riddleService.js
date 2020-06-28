@@ -4,20 +4,18 @@ import { getResizedImage } from "./imageService.js";
 import { getEncryptedText, assertEncryptedText } from "./cryptoService.js";
 
 const IMAGE_SIZE = 500;
+const PAGE_SIZE_LOOK_UP = 500;
 const OPTIONS_SIZE = 8;
 
 export const getNewRiddle = async () => {
-    const popularMovies = (await getPopularMovies()).results;
-    const randomMovie = getRandom(popularMovies);
-    const idRandomMovie = randomMovie.id;
-    const relatedMovies = (await getSimilars(idRandomMovie)).results;
+    const { movie, relatedMovies } = await getMovieToRiddle();
     let relatedMoviesOptions = [];
-    relatedMovies.forEach(movie => relatedMoviesOptions.push(movie.original_title));
+    relatedMovies.forEach(relatedMovie => relatedMoviesOptions.push(relatedMovie.original_title));
     relatedMoviesOptions = shuffleSlice(relatedMoviesOptions, OPTIONS_SIZE - 1);
-    relatedMoviesOptions.push(randomMovie.title);
+    relatedMoviesOptions.push(movie.title);
     return {
-        riddle: getEncryptedText(randomMovie.original_title),
-        image: getResizedImage(randomMovie.backdrop_path, IMAGE_SIZE),
+        riddle: getEncryptedText(movie.original_title),
+        image: getResizedImage(movie.backdrop_path, IMAGE_SIZE),
         options: shuffle(relatedMoviesOptions),
     }
 }
@@ -26,18 +24,42 @@ export const checkOption = (riddle, option) => {
     return assertEncryptedText(option, riddle);
 }
 
-export const getFirst = (array) => {
+const getMovieToRiddle = async () => {
+    const popularMovies = (await getPopularMovies(getRandomPageNumber(PAGE_SIZE_LOOK_UP))).results;
+    const randomMovie = getRandomMovieWithImage(popularMovies);
+    const relatedMovies = (await getSimilars(randomMovie.id)).results;
+    if (relatedMovies.length > OPTIONS_SIZE)
+        return {
+            movie: randomMovie,
+            relatedMovies: relatedMovies,
+        }
+    return await getMovieToRiddle();
+}
+
+const getFirst = (array) => {
     return array[0];
 };
 
-export const getRandom = (array) => {
+const getRandomPageNumber = (pageSize) => {
+    return Math.floor(Math.random() * pageSize + 1);
+}
+
+const getRandom = (array) => {
     return array[Math.floor(Math.random() * array.length)];
 };
 
-export const shuffle = (array) => {
-    return array.sort(() => Math.random() - 0.5);
-}
+const getRandomMovieWithImage = (array, attemps = 3) => {
+    let currentAttempt = 0;
+    let movie = getRandom(array);
+    while (currentAttempt++ < attemps && !movie.backdrop_path)
+        movie = getRandom(array);
+    return movie;
+};
 
-export const shuffleSlice = (array, size) => {
+const shuffle = (array) => {
+    return array.sort(() => Math.random() - 0.5);
+};
+
+const shuffleSlice = (array, size) => {
     return array.sort(() => Math.random() - 0.5).slice(0, size);
-}
+};
