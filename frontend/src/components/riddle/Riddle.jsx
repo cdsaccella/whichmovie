@@ -30,7 +30,7 @@ function Riddle(props) {
       if (!result.data.result) setGameOver(true);
     }
     checkAnswer();
-  }, [option]);
+  }, [riddle, option]);
 
   const selectOption = (option) => {
     setOption(option);
