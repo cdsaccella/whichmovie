@@ -5,8 +5,8 @@ export const getRandomMovie = (movies) => {
     return movies.results[Math.floor(Math.random() * movies.results.length)];
 };
 
-export const getPopularMovies = async () => {
-    const apiResponse = await fetch(`${moviesApiUrl}movie/popular?${apiKeyParam}`);
+export const getPopularMovies = async (pageNumber = 1) => {
+    const apiResponse = await fetch(`${moviesApiUrl}movie/popular?${apiKeyParam}&page=${pageNumber}`);
     return await apiResponse.json();
 }
 
