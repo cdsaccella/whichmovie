@@ -15,12 +15,12 @@ jobs:
     steps:
       - name: checkout
         uses: actions/checkout@v1
-      - name: instal
-        run: yarn install
+      - name: install
+        run: yarn install --production=false
       - name: tests
         run: yarn test
       - name: build
-        run: yarn build
+        run: yarn build-dev
       - name: deploy
         env:
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
