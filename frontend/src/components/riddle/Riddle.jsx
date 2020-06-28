@@ -1,24 +1,40 @@
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import "./Riddle.css";
+import { assertRiddle, getNewRiddle } from "../../services/RiddleService.js";
 
 function Riddle(props) {
   const [image, setImage] = useState({});
   const [options, setOptions] = useState([]);
   const [riddle, setRiddle] = useState("");
+  const [option, setOption] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [gameOver, setGameOver] = useState(false);
 
   useEffect(() => {
-    fetch(`${process.env.REACT_APP_API_URL}/riddles`)
-      .then((res) => res.json())
-      .then((res) => {
-        setImage(res.data.image);
-        setOptions(res.data.options);
-        setRiddle(res.data.riddle);
-        setIsLoading(false);
-      })
-      .catch((error) => console.log(error));
+    async function getData() {
+      const newRiddle = await getNewRiddle();
+      setImage(newRiddle.data.image);
+      setOptions(newRiddle.data.options);
+      setRiddle(newRiddle.data.riddle);
+      setIsLoading(false);
+    }
+    getData();
   }, []);
+
+  useEffect(() => {
+    if (option === null) return;
+    async function checkAnswer() {
+      const result = await assertRiddle(riddle, option);
+      setIsLoading(false);
+      if (!result.data.result) setGameOver(true);
+    }
+    checkAnswer();
+  }, [option]);
+
+  const selectOption = (option) => {
+    setOption(option);
+  };
 
   return (
     <div className="nes-container with-title is-centered">
@@ -26,16 +42,22 @@ function Riddle(props) {
       {isLoading && (
         <progress className="nes-progress" value="90" max="100"></progress>
       )}
-      <img src={image}></img>
-      {options.map((option, index) => (
-        <div key={index} className="nes-field">
-          <div className="button-container">
-            <button type="button" className="nes-btn">
-              {option}
-            </button>
+      {!gameOver && !isLoading && <img src={image}></img>}
+      {!gameOver &&
+        options.map((option, index) => (
+          <div key={index} className="nes-field">
+            <div className="button-container">
+              <button
+                type="button"
+                className="nes-btn"
+                onClick={() => selectOption(option)}
+              >
+                {option}
+              </button>
+            </div>
           </div>
-        </div>
-      ))}
+        ))}
+      {gameOver && <p>You lost!</p>}
     </div>
   );
 }
