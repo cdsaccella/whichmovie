@@ -26,7 +26,7 @@ export const checkOption = (riddle, option) => {
 
 const getMovieToRiddle = async () => {
     const popularMovies = (await getPopularMovies(getRandomPageNumber(PAGE_SIZE_LOOK_UP))).results;
-    const randomMovie = getRandom(popularMovies);
+    const randomMovie = getRandomMovieWithImage(popularMovies);
     const relatedMovies = (await getSimilars(randomMovie.id)).results;
     if (relatedMovies.length > OPTIONS_SIZE)
         return {
@@ -48,10 +48,18 @@ const getRandom = (array) => {
     return array[Math.floor(Math.random() * array.length)];
 };
 
+const getRandomMovieWithImage = (array, attemps = 3) => {
+    let currentAttempt = 0;
+    let movie = getRandom(array);
+    while (currentAttempt++ < attemps && !movie.backdrop_path)
+        movie = getRandom(array);
+    return movie;
+};
+
 const shuffle = (array) => {
     return array.sort(() => Math.random() - 0.5);
-}
+};
 
 const shuffleSlice = (array, size) => {
     return array.sort(() => Math.random() - 0.5).slice(0, size);
-}
+};

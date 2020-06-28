@@ -2,29 +2,33 @@ import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import "./Riddle.css";
 import { assertRiddle, getNewRiddle } from "../../services/RiddleService.js";
+import Stars from "./Stars.jsx";
 
 function Riddle(props) {
+  const MAX_POINTS = 10;
+
   const [image, setImage] = useState("");
   const [options, setOptions] = useState([]);
   const [riddle, setRiddle] = useState("");
   const [option, setOption] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [gameOver, setGameOver] = useState(false);
-  const [newGame, setNewGame] = useState(true);
+  const [newRiddle, setNewRiddle] = useState(true);
+  const [counter, setCounter] = useState(0);
 
   useEffect(() => {
-    if (!newGame) return;
+    if (!newRiddle) return;
     setIsLoading(true);
     async function getData() {
       const newRiddle = await getNewRiddle();
       setImage(newRiddle.data.image);
       setOptions(newRiddle.data.options);
       setRiddle(newRiddle.data.riddle);
+      setNewRiddle(false);
       setIsLoading(false);
-      setNewGame(false);
     }
     getData();
-  }, [newGame]);
+  }, [newRiddle]);
 
   useEffect(() => {
     if (option === null) return;
@@ -32,10 +36,15 @@ function Riddle(props) {
       const result = await assertRiddle(riddle, option);
       setIsLoading(false);
       setOption(null);
-      if (!result.data.result) setGameOver(true);
+      if (result.data.result) {
+        setCounter(counter + 1);
+        setNewRiddle(true);
+      } else {
+        setGameOver(true);
+      }
     }
     checkAnswer();
-  }, [riddle, option]);
+  }, [counter, riddle, option]);
 
   const selectOption = (option) => {
     setOption(option);
@@ -43,7 +52,7 @@ function Riddle(props) {
 
   const restartGame = () => {
     refreshGame();
-    setNewGame(true);
+    setNewRiddle(true);
   };
 
   const refreshGame = () => {
@@ -52,6 +61,7 @@ function Riddle(props) {
     setOption(null);
     setRiddle("");
     setGameOver(false);
+    setCounter(0);
   };
 
   return (
@@ -60,20 +70,23 @@ function Riddle(props) {
       {isLoading && (
         <progress className="nes-progress" value="90" max="100"></progress>
       )}
-      {!gameOver && !isLoading && <img src={image} alt="Movie"></img>}
-      {!gameOver && (
-        <div className="button-container">
-          {options.map((option, index) => (
-            <button
-              key={index}
-              type="button"
-              className="nes-btn"
-              onClick={() => selectOption(option)}
-            >
-              {option}
-            </button>
-          ))}
-        </div>
+      {!gameOver && !isLoading && (
+        <>
+          <Stars stars={counter} maxStars={MAX_POINTS} />
+          <img src={image} alt="Movie"></img>
+          <div className="button-container">
+            {options.map((option, index) => (
+              <button
+                key={index}
+                type="button"
+                className="nes-btn"
+                onClick={() => selectOption(option)}
+              >
+                {option}
+              </button>
+            ))}
+          </div>
+        </>
       )}
       {gameOver && (
         <>
