@@ -1,6 +1,7 @@
 import React from "react";
 import logo from "./logo.svg";
 import "./App.css";
+import Riddle from "./components/riddle/Riddle.jsx";
 
 function App() {
   console.log(
@@ -8,18 +9,9 @@ function App() {
   );
 
   return (
-    <div className="App">
+    <div className="App-container">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>Are you ready for this CABRONAZO?</p>
-        <a
-          className="nes-btn"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Let's go
-        </a>
+        <Riddle image="https://picsum.photos/200/300"></Riddle>
       </header>
     </div>
   );
