@@ -16,7 +16,7 @@ function App() {
           <title>Which movie?</title>
         </Helmet>
         <header className="App-header">
-          <Riddle image="https://picsum.photos/200/300"></Riddle>
+          <Riddle></Riddle>
         </header>
       </div>
     </HelmetProvider>

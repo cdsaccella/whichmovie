@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useRef } from "react";
-import PropTypes from "prop-types";
 import "./Riddle.css";
 import {
   assertRiddle,
@@ -8,8 +7,9 @@ import {
 } from "../../services/RiddleService.js";
 import Stars from "./Stars.jsx";
 import Timer from "./Timer.jsx";
+import loadingImage from "../../assets/loadingImage.jpg";
 
-function Riddle(props) {
+function Riddle() {
   const MAX_POINTS = 10;
 
   const [isLoading, setIsLoading] = useState(true);
@@ -114,18 +114,23 @@ function Riddle(props) {
         )}
         {isLoading && (
           <>
-            {newRiddle && <p>Loading new riddle...</p>}
-            <progress className="nes-progress" value="90" max="100"></progress>
+            <img
+              className="image-wrapper section"
+              style={{ imageRendering: "pixelated" }}
+              src={loadingImage}
+              alt="Loading"
+            />
+            {newRiddle && <p>Loading options...</p>}
           </>
         )}
         {!gameOver && !isLoading && (
           <>
             <img
-              className="image-wrapper image-responsive"
+              className="image-wrapper"
               style={{ imageRendering: "pixelated" }}
               src={riddle.image}
               alt="Movie"
-            ></img>
+            />
             <div className="button-container">
               {riddle.options.map((option, index) => (
                 <button
@@ -144,10 +149,5 @@ function Riddle(props) {
     </div>
   );
 }
-
-Riddle.propTypes = {
-  image: PropTypes.string,
-  options: PropTypes.array,
-};
 
 export default Riddle;
