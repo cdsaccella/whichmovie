@@ -65,46 +65,57 @@ function Riddle(props) {
   };
 
   return (
-    <div className="nes-container with-title is-centered">
+    <div className="riddle-host nes-container with-title is-centered">
       <p className="title">Try it!</p>
-      {isLoading && (
-        <progress className="nes-progress" value="90" max="100"></progress>
-      )}
-      {!gameOver && !isLoading && (
-        <>
-          <Stars stars={counter} maxStars={MAX_POINTS} />
-          <img
-            className="content-wrapper image-responsive"
-            style={{ imageRendering: "pixelated" }}
-            src={image}
-            alt="Movie"
-          ></img>
-          <div className="button-container">
-            {options.map((option, index) => (
-              <button
-                key={index}
-                type="button"
-                className="nes-btn"
-                onClick={() => selectOption(option)}
-              >
-                {option}
-              </button>
-            ))}
-          </div>
-        </>
-      )}
       {gameOver && (
-        <>
-          <p>You lost!</p>
-          <button
-            type="button"
-            className="nes-btn"
-            onClick={() => restartGame()}
-          >
-            Restart game
-          </button>
-        </>
+        <div className="game-over-wrapper">
+          <div>
+            <p>You lost!</p>
+            <button
+              type="button"
+              className="nes-btn"
+              onClick={() => restartGame()}
+            >
+              Restart game
+            </button>
+          </div>
+        </div>
       )}
+      <div className="content-wrapper">
+        {!gameOver && (
+          <div className="stars-container">
+            <Stars stars={counter} maxStars={MAX_POINTS} />
+          </div>
+        )}
+        {isLoading && (
+          <>
+            {newRiddle && <p>Loading new riddle...</p>}
+            <progress className="nes-progress" value="90" max="100"></progress>
+          </>
+        )}
+        {!gameOver && !isLoading && (
+          <>
+            <img
+              className="image-wrapper image-responsive"
+              style={{ imageRendering: "pixelated" }}
+              src={image}
+              alt="Movie"
+            ></img>
+            <div className="button-container">
+              {options.map((option, index) => (
+                <button
+                  key={index}
+                  type="button"
+                  className="nes-btn"
+                  onClick={() => selectOption(option)}
+                >
+                  {option}
+                </button>
+              ))}
+            </div>
+          </>
+        )}
+      </div>
     </div>
   );
 }
