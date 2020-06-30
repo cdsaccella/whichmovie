@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import "./Riddle.css";
 import { assertRiddle, getNewRiddle } from "../../services/RiddleService.js";
 import Stars from "./Stars.jsx";
+import Timer from "./Timer.jsx";
 
 function Riddle(props) {
   const MAX_POINTS = 10;
@@ -15,10 +16,13 @@ function Riddle(props) {
   const [gameOver, setGameOver] = useState(false);
   const [newRiddle, setNewRiddle] = useState(true);
   const [counter, setCounter] = useState(0);
+  const [time, setTime] = useState(100);
+  const [intervalId, setIntervalId] = useState(null);
 
   useEffect(() => {
     if (!newRiddle) return;
     setIsLoading(true);
+    clearInterval(intervalId);
     async function getData() {
       const newRiddle = await getNewRiddle();
       setImage(newRiddle.data.image);
@@ -28,7 +32,19 @@ function Riddle(props) {
       setIsLoading(false);
     }
     getData();
+    setTime(100);
+    const id = setInterval(() => {
+      setTime((time) => time - 10);
+    }, 1000);
+    setIntervalId(id);
   }, [newRiddle]);
+
+  useEffect(() => {
+    if (time < 0) {
+      setGameOver(true);
+      clearInterval(intervalId);
+    }
+  }, [intervalId, time]);
 
   useEffect(() => {
     if (option === null) return;
@@ -37,14 +53,14 @@ function Riddle(props) {
       setIsLoading(false);
       setOption(null);
       if (result.data.result) {
-        setCounter(counter + 1);
+        setCounter((counter) => counter + 1);
         setNewRiddle(true);
       } else {
         setGameOver(true);
       }
     }
     checkAnswer();
-  }, [counter, riddle, option]);
+  }, [riddle, option]);
 
   const selectOption = (option) => {
     setOption(option);
@@ -67,6 +83,7 @@ function Riddle(props) {
   return (
     <div className="riddle-host nes-container with-title is-centered">
       <p className="title">Try it!</p>
+
       {gameOver && (
         <div className="game-over-wrapper">
           <div>
@@ -82,6 +99,7 @@ function Riddle(props) {
         </div>
       )}
       <div className="content-wrapper">
+        {!gameOver && !isLoading && <Timer progress={time}></Timer>}
         {!gameOver && (
           <div className="stars-container">
             <Stars stars={counter} maxStars={MAX_POINTS} />
