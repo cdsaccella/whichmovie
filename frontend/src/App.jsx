@@ -1,6 +1,7 @@
 import React from "react";
 import "./App.css";
 import Riddle from "./components/riddle/Riddle.jsx";
+import { Helmet, HelmetProvider } from "react-helmet-async";
 
 function App() {
   console.log(
@@ -8,11 +9,17 @@ function App() {
   );
 
   return (
-    <div className="App-container">
-      <header className="App-header">
-        <Riddle image="https://picsum.photos/200/300"></Riddle>
-      </header>
-    </div>
+    <HelmetProvider>
+      <div className="App-container">
+        <Helmet>
+          <meta charSet="utf-8" />
+          <title>Which movie?</title>
+        </Helmet>
+        <header className="App-header">
+          <Riddle image="https://picsum.photos/200/300"></Riddle>
+        </header>
+      </div>
+    </HelmetProvider>
   );
 }
 

@@ -9,6 +9,7 @@
     "eslint-config-airbnb": "^18.2.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
+    "react-helmet-async": "^1.0.6",
     "react-scripts": "3.4.1"
   },
   "scripts": {

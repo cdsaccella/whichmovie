@@ -1,14 +1,15 @@
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 
-function Timer({ progress }) {
+function Timer({ progress, waiting }) {
   const [color, setColor] = useState("is-success");
 
   useEffect(() => {
-    if (progress > 60) setColor("is-success");
+    if (waiting) setColor(String.empty);
+    else if (progress > 60) setColor("is-success");
     else if (progress > 20) setColor("is-warning");
     else setColor("is-error");
-  }, [progress]);
+  }, [waiting, progress]);
 
   return (
     <>
@@ -23,6 +24,7 @@ function Timer({ progress }) {
 
 Timer.propTypes = {
   progress: PropTypes.number,
+  waiting: PropTypes.bool,
 };
 
 export default Timer;
