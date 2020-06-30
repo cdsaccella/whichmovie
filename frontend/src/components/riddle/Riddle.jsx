@@ -75,6 +75,7 @@ function Riddle(props) {
           <Stars stars={counter} maxStars={MAX_POINTS} />
           <img
             className="content-wrapper image-responsive"
+            style={{ imageRendering: "pixelated" }}
             src={image}
             alt="Movie"
           ></img>
