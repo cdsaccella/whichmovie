@@ -1,50 +1,68 @@
-import React, { useState, useEffect } from "react";
-import PropTypes from "prop-types";
+import React, { useState, useEffect, useRef } from "react";
 import "./Riddle.css";
-import { assertRiddle, getNewRiddle } from "../../services/RiddleService.js";
+import {
+  assertRiddle,
+  getNewRiddle,
+  NO_RIDDLE,
+} from "../../services/RiddleService.js";
 import Stars from "./Stars.jsx";
+import Timer from "./Timer.jsx";
+import loadingImage from "../../assets/loadingImage.jpg";
 
-function Riddle(props) {
+function Riddle() {
   const MAX_POINTS = 10;
 
-  const [image, setImage] = useState("");
-  const [options, setOptions] = useState([]);
-  const [riddle, setRiddle] = useState("");
-  const [option, setOption] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [riddle, setRiddle] = useState(NO_RIDDLE);
+  const [option, setOption] = useState(null);
   const [gameOver, setGameOver] = useState(false);
   const [newRiddle, setNewRiddle] = useState(true);
-  const [counter, setCounter] = useState(0);
+  const [score, setScore] = useState(0);
+  const [time, setTime] = useState(100);
+  const timerToClearSomewhere = useRef(null);
+
+  let riddleRef = useRef(NO_RIDDLE);
 
   useEffect(() => {
     if (!newRiddle) return;
     setIsLoading(true);
+    if (timerToClearSomewhere) clearInterval(timerToClearSomewhere.current);
     async function getData() {
-      const newRiddle = await getNewRiddle();
-      setImage(newRiddle.data.image);
-      setOptions(newRiddle.data.options);
-      setRiddle(newRiddle.data.riddle);
-      setNewRiddle(false);
+      setRiddle(await getNewRiddle());
       setIsLoading(false);
+      setNewRiddle(false);
+      setTime(100);
+      timerToClearSomewhere.current = setInterval(() => {
+        setTime((time) => time - 10);
+      }, 1000);
     }
     getData();
   }, [newRiddle]);
 
   useEffect(() => {
+    riddleRef.current = riddle;
+  }, [riddle]);
+
+  useEffect(() => {
+    if (time < 0) {
+      setGameOver(true);
+      clearInterval(timerToClearSomewhere.current);
+    }
+  }, [time]);
+
+  useEffect(() => {
     if (option === null) return;
     async function checkAnswer() {
-      const result = await assertRiddle(riddle, option);
-      setIsLoading(false);
-      setOption(null);
-      if (result.data.result) {
-        setCounter(counter + 1);
+      const result = await assertRiddle(riddleRef.current.id, option);
+      if (result) {
+        setScore((score) => score + 1);
         setNewRiddle(true);
       } else {
         setGameOver(true);
       }
     }
     checkAnswer();
-  }, [counter, riddle, option]);
+  }, [option]);
 
   const selectOption = (option) => {
     setOption(option);
@@ -56,61 +74,80 @@ function Riddle(props) {
   };
 
   const refreshGame = () => {
-    setImage("");
-    setOptions([]);
     setOption(null);
-    setRiddle("");
+    setRiddle(NO_RIDDLE);
     setGameOver(false);
-    setCounter(0);
+    setScore(0);
   };
 
   return (
-    <div className="nes-container with-title is-centered">
+    <div className="riddle-host nes-container with-title is-centered">
       <p className="title">Try it!</p>
-      {isLoading && (
-        <progress className="nes-progress" value="90" max="100"></progress>
-      )}
-      {!gameOver && !isLoading && (
-        <>
-          <Stars stars={counter} maxStars={MAX_POINTS} />
-          <img
-            className="content-wrapper image-responsive"
-            src={image}
-            alt="Movie"
-          ></img>
-          <div className="button-container">
-            {options.map((option, index) => (
-              <button
-                key={index}
-                type="button"
-                className="nes-btn"
-                onClick={() => selectOption(option)}
-              >
-                {option}
-              </button>
-            ))}
-          </div>
-        </>
-      )}
+
       {gameOver && (
-        <>
-          <p>You lost!</p>
-          <button
-            type="button"
-            className="nes-btn"
-            onClick={() => restartGame()}
-          >
-            Restart game
-          </button>
-        </>
+        <div className="game-over-wrapper">
+          <div>
+            <p>You lost!</p>
+            <button
+              type="button"
+              className="nes-btn"
+              onClick={() => restartGame()}
+            >
+              Restart game
+            </button>
+          </div>
+        </div>
       )}
+      <div className="content-wrapper">
+        {!gameOver && (
+          <div className="section">
+            <Timer
+              progress={isLoading ? 100 : time}
+              waiting={isLoading}
+            ></Timer>
+          </div>
+        )}
+        {!gameOver && (
+          <div className="section">
+            <Stars stars={score} maxStars={MAX_POINTS} />
+          </div>
+        )}
+        {isLoading && (
+          <>
+            <img
+              className="image-wrapper section"
+              style={{ imageRendering: "pixelated" }}
+              src={loadingImage}
+              alt="Loading"
+            />
+            {newRiddle && <p>Loading options...</p>}
+          </>
+        )}
+        {!gameOver && !isLoading && (
+          <>
+            <img
+              className="image-wrapper"
+              style={{ imageRendering: "pixelated" }}
+              src={riddle.image}
+              alt="Movie"
+            />
+            <div className="button-container">
+              {riddle.options.map((option, index) => (
+                <button
+                  key={index}
+                  type="button"
+                  className="nes-btn"
+                  onClick={() => selectOption(option)}
+                >
+                  {option}
+                </button>
+              ))}
+            </div>
+          </>
+        )}
+      </div>
     </div>
   );
 }
-
-Riddle.propTypes = {
-  image: PropTypes.string,
-  options: PropTypes.array,
-};
 
 export default Riddle;

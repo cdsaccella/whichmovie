@@ -7,12 +7,17 @@ function Stars({ stars, maxStars }) {
   const emptyStars = [];
 
   for (let i = 0; i < stars; i++) {
-    paintedStars.push(<i class="nes-icon is-large star custom-star"></i>);
+    paintedStars.push(
+      <i key={i} className="nes-icon is-large star custom-star"></i>
+    );
   }
 
   for (let i = 0; i < maxStars - stars; i++) {
     emptyStars.push(
-      <i class="nes-icon is-large star custom-star is-empty"></i>
+      <i
+        key={maxStars - i}
+        className="nes-icon is-large star custom-star is-empty"
+      ></i>
     );
   }
 
