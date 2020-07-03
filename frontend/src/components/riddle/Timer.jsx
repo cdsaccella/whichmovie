@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 
-function Timer({ progress, waiting }) {
+function Timer({ progress, waiting, maxValue }) {
   const [color, setColor] = useState("is-success");
 
   useEffect(() => {
@@ -16,7 +16,7 @@ function Timer({ progress, waiting }) {
       <progress
         className={"nes-progress " + color}
         value={progress}
-        max="100"
+        max={maxValue ?? 100}
       ></progress>
     </>
   );
@@ -24,6 +24,7 @@ function Timer({ progress, waiting }) {
 
 Timer.propTypes = {
   progress: PropTypes.number,
+  maxValue: PropTypes.number,
   waiting: PropTypes.bool,
 };
 

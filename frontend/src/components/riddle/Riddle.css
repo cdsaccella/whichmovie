@@ -27,3 +27,7 @@
 .image-wrapper {
   width: 100%;
 }
+
+.image-wrapper > canvas {
+  width: 100%;
+}
