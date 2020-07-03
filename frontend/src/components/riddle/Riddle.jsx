@@ -11,8 +11,8 @@ import loadingImage from "../../assets/loadingImage.jpg";
 import { Pixelify } from "react-pixelify";
 
 function Riddle() {
-  const MAX_POINTS = 20;
-  const TIME = 10000;
+  const MAX_POINTS = 10;
+  const TIME = 200;
 
   const [isLoading, setIsLoading] = useState(true);
   const [riddle, setRiddle] = useState(NO_RIDDLE);
