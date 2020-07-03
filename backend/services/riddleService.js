@@ -3,9 +3,9 @@ import { getPopularMovies } from "./movieService.js";
 import { getResizedImage } from "./imageService.js";
 import { getEncryptedText, assertEncryptedText } from "./cryptoService.js";
 
-const IMAGE_SIZE = 185;
-const PAGE_SIZE_LOOK_UP = 500;
-const OPTIONS_SIZE = 8;
+const IMAGE_SIZE = 780;
+const PAGE_SIZE_LOOK_UP = 100;
+const OPTIONS_SIZE = 6;
 
 export const getNewRiddle = async () => {
     const { movie, relatedMovies } = await getMovieToRiddle();

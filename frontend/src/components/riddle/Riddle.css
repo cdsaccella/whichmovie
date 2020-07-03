@@ -27,3 +27,23 @@
 .image-wrapper {
   width: 100%;
 }
+
+.image-wrapper > canvas {
+  width: 100%;
+}
+
+@media (max-width: 600px) {
+  .nes-container {
+    padding: 1.5rem 0rem !important;
+  }
+
+  .section {
+    padding: 0rem 1rem;
+  }
+
+  .image-wrapper {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+  }
+}

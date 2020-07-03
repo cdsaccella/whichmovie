@@ -2,7 +2,7 @@ export const NO_RIDDLE = {
   id: String.empty,
   image: String.empty,
   options: [],
-}
+};
 
 export const getNewRiddle = async () => {
   const result = await fetch(`${process.env.REACT_APP_API_URL}/riddles`);

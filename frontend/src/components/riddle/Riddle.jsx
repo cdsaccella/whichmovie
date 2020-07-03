@@ -8,9 +8,11 @@ import {
 import Stars from "./Stars.jsx";
 import Timer from "./Timer.jsx";
 import loadingImage from "../../assets/loadingImage.jpg";
+import { Pixelify } from "react-pixelify";
 
 function Riddle() {
-  const MAX_POINTS = 10;
+  const MAX_POINTS = 20;
+  const TIME = 10000;
 
   const [isLoading, setIsLoading] = useState(true);
   const [riddle, setRiddle] = useState(NO_RIDDLE);
@@ -31,7 +33,7 @@ function Riddle() {
       setRiddle(await getNewRiddle());
       setIsLoading(false);
       setNewRiddle(false);
-      setTime(100);
+      setTime(TIME);
       timerToClearSomewhere.current = setInterval(() => {
         setTime((time) => time - 10);
       }, 1000);
@@ -102,7 +104,8 @@ function Riddle() {
         {!gameOver && (
           <div className="section">
             <Timer
-              progress={isLoading ? 100 : time}
+              progress={isLoading ? TIME : time}
+              maxValue={TIME}
               waiting={isLoading}
             ></Timer>
           </div>
@@ -114,23 +117,17 @@ function Riddle() {
         )}
         {isLoading && (
           <>
-            <img
-              className="image-wrapper section"
-              style={{ imageRendering: "pixelated" }}
-              src={loadingImage}
-              alt="Loading"
-            />
+            <div className="section">
+              <img className="image-wrapper" src={loadingImage} alt="Loading" />
+            </div>
             {newRiddle && <p>Loading options...</p>}
           </>
         )}
         {!gameOver && !isLoading && (
           <>
-            <img
-              className="image-wrapper"
-              style={{ imageRendering: "pixelated" }}
-              src={riddle.image}
-              alt="Movie"
-            />
+            <div className="image-wrapper">
+              <Pixelify src={riddle.image} centered={true} pixelSize={4} />
+            </div>
             <div className="button-container">
               {riddle.options.map((option, index) => (
                 <button
