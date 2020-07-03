@@ -11,7 +11,7 @@ import loadingImage from "../../assets/loadingImage.jpg";
 import { Pixelify } from "react-pixelify";
 
 function Riddle() {
-  const MAX_POINTS = 10;
+  const MAX_POINTS = 20;
   const TIME = 10000;
 
   const [isLoading, setIsLoading] = useState(true);
@@ -117,10 +117,9 @@ function Riddle() {
         )}
         {isLoading && (
           <>
-            <div className="image-wrapper section">
-              <img src={loadingImage} alt="Loading" />
+            <div className="section">
+              <img className="image-wrapper" src={loadingImage} alt="Loading" />
             </div>
-
             {newRiddle && <p>Loading options...</p>}
           </>
         )}
