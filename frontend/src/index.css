@@ -1,13 +1,4 @@
 body {
-  padding: 2rem;
-  margin: 2rem;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-}
-
-@media (max-width: 600px) {
-  body {
-    padding: 0.5rem;
-    margin: 0.5rem;
-  }
 }

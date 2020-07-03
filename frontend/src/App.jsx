@@ -2,6 +2,7 @@ import React from "react";
 import "./App.css";
 import Riddle from "./components/riddle/Riddle.jsx";
 import { Helmet, HelmetProvider } from "react-helmet-async";
+import References from "./components/references/References.jsx";
 
 function App() {
   console.log(
@@ -15,9 +16,12 @@ function App() {
           <meta charSet="utf-8" />
           <title>Which movie?</title>
         </Helmet>
-        <header className="App-header">
+        <header className="App-header App-section">
           <Riddle></Riddle>
         </header>
+        <div className="App-section">
+          <References />
+        </div>
       </div>
     </HelmetProvider>
   );

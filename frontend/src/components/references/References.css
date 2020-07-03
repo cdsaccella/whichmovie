@@ -1,0 +1,7 @@
+.article-link > .title span {
+  margin-left: 1rem;
+}
+
+.article-link > .title a {
+  color: #333;
+}

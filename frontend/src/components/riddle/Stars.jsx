@@ -3,8 +3,6 @@ import PropTypes from "prop-types";
 import "./Stars.css";
 
 function Stars({ stars, maxStars }) {
-  const paintedStars = [];
-  const emptyStars = [];
   const size = useWindowSize();
 
   let content = <></>;

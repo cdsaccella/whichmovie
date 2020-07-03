@@ -5,7 +5,17 @@
 
 .App-header {
   background-color: white;
-  min-height: 90vh;
+  min-height: 100vh;
   display: flex;
   justify-content: center;
+}
+
+.App-section {
+  padding: 2rem;
+}
+
+@media (max-width: 600px) {
+  .App-section {
+    padding: 0.5rem;
+  }
 }
