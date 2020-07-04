@@ -14,8 +14,16 @@
   padding: 2rem;
 }
 
+.App-footer {
+  padding-top: 2rem;
+}
+
 @media (max-width: 600px) {
   .App-section {
     padding: 0.5rem;
+  }
+
+  .App-footer {
+    padding-top: 4rem;
   }
 }

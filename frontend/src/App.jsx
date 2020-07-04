@@ -19,7 +19,7 @@ function App() {
         <header className="App-header App-section">
           <Riddle></Riddle>
         </header>
-        <div className="App-section">
+        <div className="App-section App-footer">
           <References />
         </div>
       </div>
