@@ -8,7 +8,7 @@ import {
 import Stars from "./Stars.jsx";
 import Timer from "./Timer.jsx";
 import loadingImage from "../../assets/loadingImage.jpg";
-import { Pixelify } from "react-pixelify";
+import Pixelify from "../pixelify/Pixelify.jsx";
 
 function Riddle() {
   const MAX_POINTS = 10;
