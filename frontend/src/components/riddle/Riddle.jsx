@@ -23,8 +23,6 @@ function Riddle() {
   const [time, setTime] = useState(100);
   const timerToClearSomewhere = useRef(null);
 
-  let riddleRef = useRef(NO_RIDDLE);
-
   useEffect(() => {
     if (!newRiddle) return;
     setIsLoading(true);
@@ -42,10 +40,6 @@ function Riddle() {
   }, [newRiddle]);
 
   useEffect(() => {
-    riddleRef.current = riddle;
-  }, [riddle]);
-
-  useEffect(() => {
     if (time < 0) {
       setGameOver(true);
       clearInterval(timerToClearSomewhere.current);
@@ -55,16 +49,18 @@ function Riddle() {
   useEffect(() => {
     if (option === null) return;
     async function checkAnswer() {
-      const result = await assertRiddle(riddleRef.current.id, option);
+      const result = await assertRiddle(riddle.id, option);
       if (result) {
         setScore((score) => score + 1);
+        setOption(null);
         setNewRiddle(true);
       } else {
         setGameOver(true);
+        clearInterval(timerToClearSomewhere.current);
       }
     }
     checkAnswer();
-  }, [option]);
+  }, [riddle, option]);
 
   const selectOption = (option) => {
     setOption(option);
@@ -123,7 +119,7 @@ function Riddle() {
             {newRiddle && <p>Loading options...</p>}
           </>
         )}
-        {!gameOver && !isLoading && (
+        {!gameOver && !isLoading && riddle && riddle.image !== undefined && (
           <>
             <div className="image-wrapper">
               <Pixelify src={riddle.image} centered={true} pixelSize={4} />
