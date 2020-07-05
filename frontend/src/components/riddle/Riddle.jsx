@@ -8,7 +8,6 @@ import {
 import Stars from "./Stars.jsx";
 import Timer from "./Timer.jsx";
 import loadingImage from "../../assets/loadingImage.jpg";
-import Pixelify from "../pixelify/Pixelify.jsx";
 
 function Riddle() {
   const MAX_POINTS = 10;
@@ -121,9 +120,12 @@ function Riddle() {
         )}
         {!gameOver && !isLoading && riddle && riddle.image !== undefined && (
           <>
-            <div className="image-wrapper">
-              <Pixelify src={riddle.image} centered={true} pixelSize={4} />
-            </div>
+            <img
+              className="image-wrapper"
+              style={{ imageRendering: "pixelated" }}
+              src={riddle.image}
+              alt="Movie"
+            />
             <div className="button-container">
               {riddle.options.map((option, index) => (
                 <button
