@@ -20,7 +20,7 @@ function App() {
 
   const selectLanguage = (e) => {
     setLanguage(e.target.value);
-    i18n.changeLanguage(language);
+    i18n.changeLanguage(e.target.value);
     setLanguageSelected(true);
   };
 
@@ -46,23 +46,33 @@ function App() {
                 <div className="language-selection">
                   <button
                     className="nes-btn"
-                    value="en"
+                    value="en-US"
                     onClick={selectLanguage}
                   >
                     <span role="img" aria-label="english">
                       🇬🇧
                     </span>
-                    English
+                    &nbsp;English
                   </button>
                   <button
                     className="nes-btn"
-                    value="es"
+                    value="es-ES"
                     onClick={selectLanguage}
                   >
                     <span role="img" aria-label="spanish">
                       🇪🇸
                     </span>
-                    Spanish
+                    &nbsp;Spanish
+                  </button>
+                  <button
+                    className="nes-btn"
+                    value="de-DE"
+                    onClick={selectLanguage}
+                  >
+                    <span role="img" aria-label="spanish">
+                      🇩🇪
+                    </span>
+                    &nbsp;German
                   </button>
                 </div>
               </div>

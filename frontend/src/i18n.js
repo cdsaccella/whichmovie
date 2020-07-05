@@ -7,11 +7,25 @@ const resources = {
   en: {
     translation: {
       'Try it!': 'Try it!',
+      'Restart game': 'Restart game',
+      'Game over': 'You lost!',
+      'Loading': 'Loading',
     },
   },
   es: {
     translation: {
       'Try it!': 'Inténtalo!',
+      'Restart game': 'Jugar de nuevo',
+      'Game over': 'Perdiste!',
+      'Loading': 'Cargando',
+    },
+  },
+  de: {
+    translation: {
+      'Try it!': 'Versuch es',
+      'Restart game': 'Neustart',
+      'Game over': 'Das spiel ist aus',
+      'Loading': 'Wird geladen',
     },
   },
 };

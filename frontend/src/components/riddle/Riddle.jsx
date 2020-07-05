@@ -87,13 +87,13 @@ function Riddle({ t, i18n }) {
       {gameOver && (
         <div className="game-over-wrapper">
           <div>
-            <p>You lost!</p>
+            <p>{t("Game over")}</p>
             <button
               type="button"
               className="nes-btn"
               onClick={() => restartGame()}
             >
-              Restart game
+              {t("Restart game")}
             </button>
           </div>
         </div>
@@ -118,7 +118,7 @@ function Riddle({ t, i18n }) {
             <div className="section">
               <img className="image-wrapper" src={loadingImage} alt="Loading" />
             </div>
-            {newRiddle && <p>Loading options...</p>}
+            {newRiddle && <p>{t("Loading")}...</p>}
           </>
         )}
         {!gameOver && !isLoading && riddle && riddle.image !== undefined && (
