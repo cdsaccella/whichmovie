@@ -10,11 +10,11 @@ const OPTIONS_SIZE = 6;
 export const getNewRiddle = async () => {
     const { movie, relatedMovies } = await getMovieToRiddle();
     let relatedMoviesOptions = [];
-    relatedMovies.forEach(relatedMovie => relatedMoviesOptions.push(relatedMovie.original_title));
+    relatedMovies.forEach(relatedMovie => relatedMoviesOptions.push(relatedMovie.title));
     relatedMoviesOptions = shuffleSlice(relatedMoviesOptions, OPTIONS_SIZE - 1);
     relatedMoviesOptions.push(movie.title);
     return {
-        riddle: getEncryptedText(movie.original_title),
+        riddle: getEncryptedText(movie.title),
         image: getResizedImage(movie.backdrop_path, IMAGE_SIZE),
         options: shuffle(relatedMoviesOptions),
     }
