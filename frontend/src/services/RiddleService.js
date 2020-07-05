@@ -4,7 +4,7 @@ export const NO_RIDDLE = {
   options: [],
 };
 
-export const getNewRiddle = async (language = "en-US") => {
+export const getNewRiddle = async (language = 'en-US') => {
   const result = await fetch(`${process.env.REACT_APP_API_URL}/riddles/${language}`);
   const jsonResult = await result.json();
   return {
