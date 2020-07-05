@@ -18,6 +18,11 @@
   padding-top: 2rem;
 }
 
+.language-selection {
+  display: flex;
+  justify-content: space-around;
+}
+
 @media (max-width: 600px) {
   .App-section {
     padding: 0.5rem;

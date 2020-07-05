@@ -7,8 +7,8 @@ const IMAGE_SIZE = 185;
 const PAGE_SIZE_LOOK_UP = 100;
 const OPTIONS_SIZE = 6;
 
-export const getNewRiddle = async () => {
-    const { movie, relatedMovies } = await getMovieToRiddle();
+export const getNewRiddle = async (language) => {
+    const { movie, relatedMovies } = await getMovieToRiddle(language);
     let relatedMoviesOptions = [];
     relatedMovies.forEach(relatedMovie => relatedMoviesOptions.push(relatedMovie.title));
     relatedMoviesOptions = shuffleSlice(relatedMoviesOptions, OPTIONS_SIZE - 1);
@@ -24,16 +24,16 @@ export const checkOption = (riddle, option) => {
     return assertEncryptedText(option, riddle);
 }
 
-const getMovieToRiddle = async () => {
-    const popularMovies = (await getPopularMovies(getRandomPageNumber(PAGE_SIZE_LOOK_UP))).results;
+const getMovieToRiddle = async (language) => {
+    const popularMovies = (await getPopularMovies(getRandomPageNumber(PAGE_SIZE_LOOK_UP), language)).results;
     const randomMovie = getRandomMovieWithImage(popularMovies);
-    const relatedMovies = (await getSimilars(randomMovie.id)).results;
+    const relatedMovies = (await getSimilars(randomMovie.id, language)).results;
     if (relatedMovies.length > OPTIONS_SIZE)
         return {
             movie: randomMovie,
             relatedMovies: relatedMovies,
         }
-    return await getMovieToRiddle();
+    return await getMovieToRiddle(language);
 }
 
 const getFirst = (array) => {

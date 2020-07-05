@@ -5,17 +5,17 @@ export const getRandomMovie = (movies) => {
     return movies.results[Math.floor(Math.random() * movies.results.length)];
 };
 
-export const getPopularMovies = async (pageNumber = 1) => {
-    const apiResponse = await fetch(`${moviesApiUrl}movie/popular?${apiKeyParam}&page=${pageNumber}`);
+export const getPopularMovies = async (pageNumber = 1, language = "en-US") => {
+    const apiResponse = await fetch(`${moviesApiUrl}movie/popular?language=${language}&${apiKeyParam}&page=${pageNumber}`);
     return await apiResponse.json();
 }
 
-export const getRecommendations = async (id) => {
-    const apiResponse = await fetch(`${moviesApiUrl}movie/${id}/recommendations?${apiKeyParam}`);
+export const getRecommendations = async (id, language = "en-US") => {
+    const apiResponse = await fetch(`${moviesApiUrl}movie/${id}/recommendations?language=${language}&${apiKeyParam}`);
     return await apiResponse.json();
 }
 
-export const getSimilars = async (id) => {
-    const apiResponse = await fetch(`${moviesApiUrl}movie/${id}/similar?${apiKeyParam}`);
+export const getSimilars = async (id, language = "en-US") => {
+    const apiResponse = await fetch(`${moviesApiUrl}movie/${id}/similar?language=${language}&${apiKeyParam}`);
     return await apiResponse.json();
 }

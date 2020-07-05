@@ -10,7 +10,7 @@ router.get('/', ({ response }) => {
 });
 
 router
-    .get('/riddles', getRiddle)
+    .get('/riddles/:lang', getRiddle)
     .post("/riddles", postRiddle);
 
 export default router;

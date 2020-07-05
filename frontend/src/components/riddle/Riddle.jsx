@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useContext } from "react";
 import "./Riddle.css";
 import {
   assertRiddle,
@@ -8,10 +8,14 @@ import {
 import Stars from "./Stars.jsx";
 import Timer from "./Timer.jsx";
 import loadingImage from "../../assets/loadingImage.jpg";
+import { withTranslation } from "react-i18next";
+import { LanguageContext } from "../../App.jsx";
 
-function Riddle() {
+function Riddle({ t, i18n }) {
   const MAX_POINTS = 10;
   const TIME = 200;
+
+  const language = useContext(LanguageContext);
 
   const [isLoading, setIsLoading] = useState(true);
   const [riddle, setRiddle] = useState(NO_RIDDLE);
@@ -27,7 +31,7 @@ function Riddle() {
     setIsLoading(true);
     if (timerToClearSomewhere) clearInterval(timerToClearSomewhere.current);
     async function getData() {
-      setRiddle(await getNewRiddle());
+      setRiddle(await getNewRiddle(language));
       setIsLoading(false);
       setNewRiddle(false);
       setTime(TIME);
@@ -79,8 +83,7 @@ function Riddle() {
 
   return (
     <div className="riddle-host nes-container with-title is-centered">
-      <p className="title">Try it!</p>
-
+      <p className="title">{t("Try it!")}</p>
       {gameOver && (
         <div className="game-over-wrapper">
           <div>
@@ -145,4 +148,4 @@ function Riddle() {
   );
 }
 
-export default Riddle;
+export default withTranslation()(Riddle);

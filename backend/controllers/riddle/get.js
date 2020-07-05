@@ -1,8 +1,8 @@
 import { getNewRiddle } from '../../services/riddleService.js'
 
-export default async ({ response }) => {
+export default async ({ params, response }) => {
     try {
-        const riddle = await getNewRiddle();
+        const riddle = await getNewRiddle(params.lang);
         response.body = { status: 'success', data: riddle };
     } catch (error) {
         console.log(error);
