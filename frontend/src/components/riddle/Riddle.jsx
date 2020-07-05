@@ -40,7 +40,7 @@ function Riddle({ t, i18n }) {
       }, 1000);
     }
     getData();
-  }, [newRiddle]);
+  }, [language, newRiddle]);
 
   useEffect(() => {
     if (time < 0) {

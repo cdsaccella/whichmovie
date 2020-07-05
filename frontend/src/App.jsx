@@ -1,4 +1,4 @@
-import React, { useState, useEffect, createContext } from "react";
+import React, { useState, createContext } from "react";
 import "./App.css";
 import Riddle from "./components/riddle/Riddle.jsx";
 import { Helmet, HelmetProvider } from "react-helmet-async";
@@ -16,14 +16,11 @@ function App() {
   const [language, setLanguage] = useState("en");
   const [languageSelected, setLanguageSelected] = useState(false);
 
-  useEffect(() => {
-    i18n.changeLanguage(language);
-  }, [language]);
-
-  const { t, i18n } = useTranslation();
+  const { i18n } = useTranslation();
 
   const selectLanguage = (e) => {
     setLanguage(e.target.value);
+    i18n.changeLanguage(language);
     setLanguageSelected(true);
   };
 
@@ -43,15 +40,31 @@ function App() {
         )}
         {!languageSelected && (
           <>
-            <header className="App-section">
-              <div className="nes-container with-title language-selection">
+            <header className="App-section language-wrapper">
+              <div className="nes-container with-title">
                 <p className="title">Select language</p>
-                <button className="nes-btn" value="en" onClick={selectLanguage}>
-                  🇬🇧 English
-                </button>
-                <button className="nes-btn" value="es" onClick={selectLanguage}>
-                  🇪🇸 Spanish
-                </button>
+                <div className="language-selection">
+                  <button
+                    className="nes-btn"
+                    value="en"
+                    onClick={selectLanguage}
+                  >
+                    <span role="img" aria-label="english">
+                      🇬🇧
+                    </span>
+                    English
+                  </button>
+                  <button
+                    className="nes-btn"
+                    value="es"
+                    onClick={selectLanguage}
+                  >
+                    <span role="img" aria-label="spanish">
+                      🇪🇸
+                    </span>
+                    Spanish
+                  </button>
+                </div>
               </div>
             </header>
             <div className="App-section App-footer">

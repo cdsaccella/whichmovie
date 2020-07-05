@@ -31,4 +31,16 @@
   .App-footer {
     padding-top: 4rem;
   }
+
+  .language-selection {
+    padding: 0 2rem;
+    flex-direction: column;
+    height: 100%;
+  }
+
+  .language-wrapper {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+  }
 }
