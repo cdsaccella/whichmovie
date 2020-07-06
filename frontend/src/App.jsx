@@ -41,7 +41,7 @@ function App() {
         {!languageSelected && (
           <>
             <header className="App-section language-wrapper">
-              <div className="nes-container with-title">
+              <div className="nes-container language-container with-title">
                 <p className="title">Select language</p>
                 <div className="language-selection">
                   <button
