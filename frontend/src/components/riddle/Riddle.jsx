@@ -8,8 +8,9 @@ import {
 import Stars from "./Stars.jsx";
 import Timer from "./Timer.jsx";
 import loadingImage from "../../assets/loadingImage.jpg";
+import { withTranslation } from "react-i18next";
 
-function Riddle() {
+function Riddle({ t, i18n }) {
   const MAX_POINTS = 10;
   const TIME = 200;
 
@@ -27,7 +28,7 @@ function Riddle() {
     setIsLoading(true);
     if (timerToClearSomewhere) clearInterval(timerToClearSomewhere.current);
     async function getData() {
-      setRiddle(await getNewRiddle());
+      setRiddle(await getNewRiddle(i18n.language));
       setIsLoading(false);
       setNewRiddle(false);
       setTime(TIME);
@@ -36,7 +37,7 @@ function Riddle() {
       }, 1000);
     }
     getData();
-  }, [newRiddle]);
+  }, [i18n.language, newRiddle]);
 
   useEffect(() => {
     if (time < 0) {
@@ -79,18 +80,17 @@ function Riddle() {
 
   return (
     <div className="riddle-host nes-container with-title is-centered">
-      <p className="title">Try it!</p>
-
+      <p className="title">{t("Try it!")}</p>
       {gameOver && (
         <div className="game-over-wrapper">
           <div>
-            <p>You lost!</p>
+            <p>{t("Game over")}</p>
             <button
               type="button"
               className="nes-btn"
               onClick={() => restartGame()}
             >
-              Restart game
+              {t("Restart game")}
             </button>
           </div>
         </div>
@@ -115,7 +115,7 @@ function Riddle() {
             <div className="section">
               <img className="image-wrapper" src={loadingImage} alt="Loading" />
             </div>
-            {newRiddle && <p>Loading options...</p>}
+            {newRiddle && <p>{t("Loading")}...</p>}
           </>
         )}
         {!gameOver && !isLoading && riddle && riddle.image !== undefined && (
@@ -145,4 +145,4 @@ function Riddle() {
   );
 }
 
-export default Riddle;
+export default withTranslation()(Riddle);
