@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, useContext } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import "./Riddle.css";
 import {
   assertRiddle,
@@ -9,13 +9,10 @@ import Stars from "./Stars.jsx";
 import Timer from "./Timer.jsx";
 import loadingImage from "../../assets/loadingImage.jpg";
 import { withTranslation } from "react-i18next";
-import { LanguageContext } from "../../App.jsx";
 
 function Riddle({ t, i18n }) {
   const MAX_POINTS = 10;
   const TIME = 200;
-
-  const language = useContext(LanguageContext);
 
   const [isLoading, setIsLoading] = useState(true);
   const [riddle, setRiddle] = useState(NO_RIDDLE);
@@ -31,7 +28,7 @@ function Riddle({ t, i18n }) {
     setIsLoading(true);
     if (timerToClearSomewhere) clearInterval(timerToClearSomewhere.current);
     async function getData() {
-      setRiddle(await getNewRiddle(language));
+      setRiddle(await getNewRiddle(i18n.language));
       setIsLoading(false);
       setNewRiddle(false);
       setTime(TIME);
@@ -40,7 +37,7 @@ function Riddle({ t, i18n }) {
       }, 1000);
     }
     getData();
-  }, [language, newRiddle]);
+  }, [i18n.language, newRiddle]);
 
   useEffect(() => {
     if (time < 0) {

@@ -28,6 +28,30 @@ const resources = {
       'Loading': 'Wird geladen',
     },
   },
+  fr: {
+    translation: {
+      'Try it!': 'Essayez-le!',
+      'Restart game': 'Recommencer le jeu',
+      'Game over': 'Jeu terminé',
+      'Loading': 'Chargement',
+    },
+  },
+  it: {
+    translation: {
+      'Try it!': 'Provalo',
+      'Restart game': 'Riprova',
+      'Game over': 'Gioco finito',
+      'Loading': 'Caricamento in corso',
+    },
+  },
+  zh: {
+    translation: {
+      'Try it!': '试试吧',
+      'Restart game': '重新开始游戏',
+      'Game over': '游戏结束',
+      'Loading': '装货',
+    },
+  },
 };
 
 i18n
