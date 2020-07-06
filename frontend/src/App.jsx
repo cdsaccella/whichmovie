@@ -26,9 +26,14 @@ function App() {
   };
 
   useEffect(() => {
+    async function checkHealth() {
+      const health = await fetch(`${process.env.REACT_APP_API_URL}/health`);
+      console.log(await health.text());
+    }
     console.log(
       `Hey, you are running in ${process.env.REACT_APP_ENV_NAME}. It is ok?`
     );
+    checkHealth();
   }, []);
 
   return (
