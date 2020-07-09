@@ -1,5 +1,5 @@
 
-if (!process.env.NETLIFY) {
+if (!process.env.AWS_EXECUTION_ENV) {
   var Jimp = require('jimp').default;
 } else {
   var Jimp = require('jimp');
@@ -12,13 +12,6 @@ const DEFAULT_CONFIG = {
 const DEFAULT_URL_IMAGE = 'https://picsum.photos/200/300';
 
 exports.handler = function (event, context, callback) {
-
-  callback(null, {
-    statusCode: 200,
-    body: JSON.stringify(process.env),
-  });
-
-  return;
 
   const pixelParam = Number(event["queryStringParameters"]["pixel"]);
   const colorParam = Number(event["queryStringParameters"]["color"]);
