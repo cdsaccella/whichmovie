@@ -1,9 +1,14 @@
 {
+  "name": "functions",
+  "version": "0.1.0",
+  "private": true,
   "scripts": {
     "start": "netlify-lambda serve ."
   },
   "dependencies": {
-    "jimp": "^0.14.0",
+    "jimp": "^0.14.0"
+  },
+  "devDependencies": {
     "netlify-lambda": "^1.6.3"
   }
 }

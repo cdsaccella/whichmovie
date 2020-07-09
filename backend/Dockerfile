@@ -1,5 +1,5 @@
 FROM hayd/alpine-deno:1.0.0
-WORKDIR /app
+WORKDIR /code
 
 # These steps will be re-run upon each file change in your working directory:
 COPY . ./

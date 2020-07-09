@@ -18,8 +18,8 @@ jobs:
       - name: install
         run: yarn install --production=false
       - name: install functions deps
-        run: yarn install --production=false
-        working-directory: functions/pixelator
+        run: yarn install
+        working-directory: functions
       - name: tests
         run: yarn test
       - name: build
