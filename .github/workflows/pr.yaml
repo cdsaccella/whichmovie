@@ -19,7 +19,7 @@ jobs:
         run: yarn install --production=false
       - name: install functions deps
         run: yarn install --production=false
-        working-directory: ../functions/pixelator
+        working-directory: functions/pixelator
       - name: tests
         run: yarn test
       - name: build
