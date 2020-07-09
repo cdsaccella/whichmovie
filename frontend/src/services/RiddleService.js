@@ -1,3 +1,5 @@
+import { getPixelatedImage } from "./ImageService.js"
+
 export const NO_RIDDLE = {
   id: String.empty,
   image: String.empty,
@@ -30,6 +32,3 @@ export const assertRiddle = async (riddle, option) => {
   return jsonResult.data.result;
 };
 
-const getPixelatedImage = (imageUrl) => {
-  return `/.netlify/functions/pixelator?color=32&pixel=4&url=${imageUrl}`;
-}

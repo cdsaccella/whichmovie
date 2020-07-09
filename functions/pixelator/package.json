@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "start:lambda": "netlify-lambda serve ."
+    "start": "netlify-lambda serve ."
   },
   "dependencies": {
     "jimp": "^0.14.0",
