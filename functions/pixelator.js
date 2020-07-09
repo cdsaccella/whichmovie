@@ -13,7 +13,10 @@ const DEFAULT_URL_IMAGE = 'https://picsum.photos/200/300';
 
 exports.handler = function (event, context, callback) {
 
-  console.log(process.env);
+  callback(null, {
+    statusCode: 200,
+    body: process.env,
+  });
 
   const pixelParam = Number(event["queryStringParameters"]["pixel"]);
   const colorParam = Number(event["queryStringParameters"]["color"]);
