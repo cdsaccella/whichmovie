@@ -121,12 +121,6 @@ function Riddle({ t, i18n }) {
         )}
         {!gameOver && !isLoading && riddle && riddle.image !== undefined && (
           <>
-            {/* <img
-              className="image-wrapper"
-              style={{ imageRendering: "pixelated" }}
-              src={riddle.image}
-              alt="Movie"
-            /> */}
             <div className="image-wrapper">
               <Pixelator
                 src={riddle.image}
