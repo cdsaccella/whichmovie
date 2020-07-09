@@ -25,7 +25,7 @@ jobs:
         env:
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
-        run: npx netlify-cli deploy --dir=build
+        run: npx netlify-cli deploy --dir=build --functions=functions
   backend:
     name: api deployment
     runs-on: ubuntu-latest
