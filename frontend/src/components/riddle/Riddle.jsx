@@ -7,7 +7,7 @@ import {
 } from "../../services/RiddleService.js";
 import Stars from "./Stars.jsx";
 import Timer from "./Timer.jsx";
-import loadingImage from "../../assets/loading.gif";
+import loadingImage from "../../assets/loading2x.gif";
 import { withTranslation } from "react-i18next";
 
 function Riddle({ t, i18n }) {
