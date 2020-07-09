@@ -9,7 +9,7 @@ export const getNewRiddle = async (language = 'en-US') => {
   const jsonResult = await result.json();
   return {
     id: jsonResult.data.riddle,
-    image: '/.netlify/functions/pixelator?color=32&pixel=4&url=' + jsonResult.data.image,
+    image: getPixelatedImage(jsonResult.data.image),
     options: jsonResult.data.options,
   };
 };
@@ -29,3 +29,7 @@ export const assertRiddle = async (riddle, option) => {
   const jsonResult = await result.json();
   return jsonResult.data.result;
 };
+
+const getPixelatedImage = (imageUrl) => {
+  return `/.netlify/functions/pixelator?color=32&pixel=4&url=${imageUrl}`;
+}
