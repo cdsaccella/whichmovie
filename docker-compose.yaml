@@ -1,0 +1,11 @@
+version: "3.7"
+
+services:
+  backend:
+    build: backend
+    ports:
+      - "8080:8080"
+  pixelator:
+    build: functions
+    ports:
+      - "9000:9000"

@@ -1,7 +1,12 @@
 # whichmovie
+
 which movie is it
 
-Try it: 
+# Run backend and functions
+
+`docker-compose up`
+
+Try it:
 
 - https://whichmovie.netlify.app
 - https://whichmovie.fly.dev

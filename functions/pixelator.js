@@ -1,4 +1,10 @@
-var Jimp = require('jimp');
+
+if (!process.env.AWS_EXECUTION_ENV) {
+  var Jimp = require('jimp').default;
+} else {
+  var Jimp = require('jimp');
+}
+
 const DEFAULT_CONFIG = {
   PIXEL: 4,
   COLOR: 32
