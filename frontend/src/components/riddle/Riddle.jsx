@@ -121,13 +121,7 @@ function Riddle({ t, i18n }) {
         )}
         {!gameOver && !isLoading && riddle && riddle.image !== undefined && (
           <>
-            <div className="image-wrapper">
-              <Pixelator
-                src={riddle.image}
-                color={32}
-                pixelSize={2}
-              ></Pixelator>
-            </div>
+            <img className="image-wrapper" src={riddle.image} alt="Movie" />
             <div className="button-container">
               {riddle.options.map((option, index) => (
                 <button
