@@ -9,6 +9,7 @@ import Stars from "./Stars.jsx";
 import Timer from "./Timer.jsx";
 import loadingImage from "../../assets/loadingImage.jpg";
 import { withTranslation } from "react-i18next";
+import Pixelator from "../pixelator/Pixelator.jsx";
 
 function Riddle({ t, i18n }) {
   const MAX_POINTS = 10;
@@ -120,12 +121,19 @@ function Riddle({ t, i18n }) {
         )}
         {!gameOver && !isLoading && riddle && riddle.image !== undefined && (
           <>
-            <img
+            {/* <img
               className="image-wrapper"
               style={{ imageRendering: "pixelated" }}
               src={riddle.image}
               alt="Movie"
-            />
+            /> */}
+            <div className="image-wrapper">
+              <Pixelator
+                src={riddle.image}
+                color={32}
+                pixelSize={2}
+              ></Pixelator>
+            </div>
             <div className="button-container">
               {riddle.options.map((option, index) => (
                 <button
