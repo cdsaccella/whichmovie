@@ -9,9 +9,9 @@ router.get('/', ({ response }) => {
     response.body = 'You shouldn\'t be here, but meh...';
 });
 
-router.get('/health', ({ response }) => {
-    response.body = "Don't worry, I'm alive.";
-});
+// router.get('/health', ({ response }) => {
+//     response.body = "Don't worry, I'm alive.";
+// });
 
 router
     .get('/riddles/:lang', getRiddle)
