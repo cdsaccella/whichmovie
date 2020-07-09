@@ -15,8 +15,10 @@ exports.handler = function (event, context, callback) {
 
   callback(null, {
     statusCode: 200,
-    body: process.env,
+    body: JSON.stringify(process.env),
   });
+
+  return;
 
   const pixelParam = Number(event["queryStringParameters"]["pixel"]);
   const colorParam = Number(event["queryStringParameters"]["color"]);
