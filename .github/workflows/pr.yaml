@@ -17,6 +17,9 @@ jobs:
         uses: actions/checkout@v1
       - name: install
         run: yarn install --production=false
+      - name: install functions deps
+        run: yarn install --production=false
+        working-directory: ../functions/pixelator
       - name: tests
         run: yarn test
       - name: build
@@ -25,22 +28,7 @@ jobs:
         env:
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
-        run: npx netlify-cli deploy --dir=build
-  pixelator:
-    runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: functions/pixelator
-    steps:
-      - name: checkout
-        uses: actions/checkout@v1
-      - name: install
-        run: yarn install --production=false
-      - name: deploy
-        env:
-          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
-          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
-        run: npx netlify-cli deploy --functions .
+        run: npx netlify-cli deploy --dir=build --functions=../functions
   backend:
     name: api deployment
     runs-on: ubuntu-latest
