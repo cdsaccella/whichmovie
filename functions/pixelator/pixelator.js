@@ -15,7 +15,7 @@ exports.handler = function (event, context, callback) {
   const colorFactor = colorParam ? colorParam : DEFAULT_CONFIG.COLOR;
   const url = urlParam ? urlParam : DEFAULT_URL_IMAGE;
 
-  Jimp.default.read(url)
+  Jimp.read(url)
     .then(image => {
       image.pixelate(pixelFactor);
 
