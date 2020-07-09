@@ -9,7 +9,6 @@ import Stars from "./Stars.jsx";
 import Timer from "./Timer.jsx";
 import loadingImage from "../../assets/loadingImage.jpg";
 import { withTranslation } from "react-i18next";
-import Pixelator from "../pixelator/Pixelator.jsx";
 
 function Riddle({ t, i18n }) {
   const MAX_POINTS = 10;
