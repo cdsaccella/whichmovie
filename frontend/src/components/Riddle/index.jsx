@@ -12,14 +12,13 @@ import "./styles.css";
 
 function Riddle({ t, i18n }) {
   const MAX_POINTS = 10;
-  const TIME = 200;
+  const TIME = 20;
 
   const [isLoading, setIsLoading] = useState(true);
   const [riddle, setRiddle] = useState(NO_RIDDLE);
   const [gameOver, setGameOver] = useState(false);
   const [newRiddle, setNewRiddle] = useState(true);
   const [score, setScore] = useState(0);
-  const [time, setTime] = useState(100);
   const timerToClearSomewhere = useRef(null);
 
   useEffect(() => {
@@ -30,20 +29,9 @@ function Riddle({ t, i18n }) {
       setRiddle(await getNewRiddle(i18n.language));
       setIsLoading(false);
       setNewRiddle(false);
-      setTime(TIME);
-      timerToClearSomewhere.current = setInterval(() => {
-        setTime((time) => time - 10);
-      }, 1000);
     }
     getData();
   }, [i18n.language, newRiddle]);
-
-  useEffect(() => {
-    if (time < 0) {
-      setGameOver(true);
-      clearInterval(timerToClearSomewhere.current);
-    }
-  }, [time]);
 
   const selectOption = async (option) => {
     const result = await assertRiddle(riddle.id, option);
@@ -67,6 +55,13 @@ function Riddle({ t, i18n }) {
     setScore(0);
   };
 
+  // ---
+
+  const riddleTimeout = () => {
+    setGameOver(true);
+    clearInterval(timerToClearSomewhere.current);
+  };
+
   return (
     <>
       {gameOver && (
@@ -87,9 +82,9 @@ function Riddle({ t, i18n }) {
         {!gameOver && (
           <div className="section">
             <Timer
-              progress={isLoading ? TIME : time}
-              maxValue={TIME}
-              waiting={isLoading}
+              seconds={TIME}
+              standBy={isLoading}
+              timeoutCallback={() => riddleTimeout()}
             ></Timer>
           </div>
         )}
