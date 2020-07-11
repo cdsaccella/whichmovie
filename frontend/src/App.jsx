@@ -1,15 +1,16 @@
 import React, { useState, useEffect } from "react";
-import "./App.css";
-import Riddle from "./components/riddle/Riddle.jsx";
-import { Helmet, HelmetProvider } from "react-helmet-async";
-import References from "./components/references/References.jsx";
-import "./i18n";
 import { useTranslation } from "react-i18next";
+import { Helmet, HelmetProvider } from "react-helmet-async";
+import Riddle from "components/Riddle/index.jsx";
+import References from "components/References/index.jsx";
+import "i18n";
+import "./App.css";
+import GameWrapper from "./components/GameWrapper/index.jsx";
 
 function App() {
   const [languageSelected, setLanguageSelected] = useState(false);
 
-  const { i18n } = useTranslation();
+  const { t, i18n } = useTranslation();
 
   const languageList = [
     { icon: "🇩🇪", text: "Deutsch", value: "de" },
@@ -45,14 +46,15 @@ function App() {
         </Helmet>
         {languageSelected && (
           <header className="App-header App-section">
-            <Riddle i18n={i18n}></Riddle>
+            <GameWrapper title={t("Try it!")}>
+              <Riddle i18n={i18n}></Riddle>
+            </GameWrapper>
           </header>
         )}
         {!languageSelected && (
           <>
-            <header className="App-section language-wrapper">
-              <div className="nes-container language-container with-title">
-                <p className="title">Select language</p>
+            <header className="App-header App-section">
+              <GameWrapper title="Select language">
                 <div className="language-selection">
                   {languageList.map((language) => (
                     <button
@@ -68,7 +70,7 @@ function App() {
                     </button>
                   ))}
                 </div>
-              </div>
+              </GameWrapper>
             </header>
             <div className="App-section App-footer">
               <References />

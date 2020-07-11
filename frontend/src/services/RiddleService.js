@@ -1,4 +1,4 @@
-import { getPixelatedImage } from "./ImageService.js"
+import { getPixelatedImage } from './ImageService';
 
 export const NO_RIDDLE = {
   id: String.empty,
@@ -31,4 +31,3 @@ export const assertRiddle = async (riddle, option) => {
   const jsonResult = await result.json();
   return jsonResult.data.result;
 };
-

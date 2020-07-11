@@ -4,8 +4,8 @@
 }
 
 .App-header {
-  background-color: white;
   min-height: 100vh;
+  background-color: white;
   display: flex;
   justify-content: center;
 }
@@ -27,14 +27,6 @@
   flex-direction: column;
 }
 
-.language-wrapper {
-  height: 75vh;
-}
-
-.language-container {
-  height: 100%;
-}
-
 @media (max-width: 600px) {
   .App-section {
     padding: 0.5rem;
@@ -49,11 +41,5 @@
     padding: 0 2rem;
     flex-direction: column;
     height: 100%;
-  }
-
-  .language-wrapper {
-    min-height: 100vh;
-    display: flex;
-    justify-content: center;
   }
 }
