@@ -79,8 +79,7 @@ function Riddle({ t, i18n }) {
   };
 
   return (
-    <div className="riddle-host nes-container with-title is-centered">
-      <p className="title">{t("Try it!")}</p>
+    <>
       {gameOver && (
         <div className="game-over-wrapper">
           <div>
@@ -136,7 +135,7 @@ function Riddle({ t, i18n }) {
           </>
         )}
       </div>
-    </div>
+    </>
   );
 }
 
