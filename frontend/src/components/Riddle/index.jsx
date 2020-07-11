@@ -17,33 +17,34 @@ function Riddle({ t, i18n }) {
   const [isLoading, setIsLoading] = useState(true);
   const [riddle, setRiddle] = useState(NO_RIDDLE);
   const [gameOver, setGameOver] = useState(false);
-  const [newRiddle, setNewRiddle] = useState(true);
   const [score, setScore] = useState(0);
 
   useEffect(() => {
-    if (!newRiddle) return;
-    setIsLoading(true);
     async function getData() {
-      setRiddle(await getNewRiddle(i18n.language));
-      setIsLoading(false);
-      setNewRiddle(false);
+      await newRiddle();
     }
     getData();
-  }, [i18n.language, newRiddle]);
+  }, []);
 
   const selectOption = async (option) => {
     const result = await assertRiddle(riddle.id, option);
     if (result) {
       setScore((score) => score + 1);
-      setNewRiddle(true);
+      newRiddle();
     } else {
       setGameOver(true);
     }
   };
 
+  const newRiddle = async () => {
+    setIsLoading(true);
+    setRiddle(await getNewRiddle(i18n.language));
+    setIsLoading(false);
+  };
+
   const restartGame = () => {
     refreshGame();
-    setNewRiddle(true);
+    newRiddle();
   };
 
   const refreshGame = () => {
@@ -94,7 +95,7 @@ function Riddle({ t, i18n }) {
             <div className="section">
               <img className="image-wrapper" src={loadingImage} alt="Loading" />
             </div>
-            {newRiddle && <p>{t("Loading")}...</p>}
+            <p>{t("Loading")}...</p>
           </>
         )}
         {!gameOver && !isLoading && riddle && riddle.image !== undefined && (
