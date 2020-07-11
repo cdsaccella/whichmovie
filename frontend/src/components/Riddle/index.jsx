@@ -16,7 +16,6 @@ function Riddle({ t, i18n }) {
 
   const [isLoading, setIsLoading] = useState(true);
   const [riddle, setRiddle] = useState(NO_RIDDLE);
-  const [option, setOption] = useState(null);
   const [gameOver, setGameOver] = useState(false);
   const [newRiddle, setNewRiddle] = useState(true);
   const [score, setScore] = useState(0);
@@ -46,24 +45,15 @@ function Riddle({ t, i18n }) {
     }
   }, [time]);
 
-  useEffect(() => {
-    if (option === null) return;
-    async function checkAnswer() {
-      const result = await assertRiddle(riddle.id, option);
-      if (result) {
-        setScore((score) => score + 1);
-        setOption(null);
-        setNewRiddle(true);
-      } else {
-        setGameOver(true);
-        clearInterval(timerToClearSomewhere.current);
-      }
+  const selectOption = async (option) => {
+    const result = await assertRiddle(riddle.id, option);
+    if (result) {
+      setScore((score) => score + 1);
+      setNewRiddle(true);
+    } else {
+      setGameOver(true);
+      clearInterval(timerToClearSomewhere.current);
     }
-    checkAnswer();
-  }, [riddle, option]);
-
-  const selectOption = (option) => {
-    setOption(option);
   };
 
   const restartGame = () => {
@@ -72,7 +62,6 @@ function Riddle({ t, i18n }) {
   };
 
   const refreshGame = () => {
-    setOption(null);
     setRiddle(NO_RIDDLE);
     setGameOver(false);
     setScore(0);
