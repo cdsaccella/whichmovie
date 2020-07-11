@@ -1,14 +1,14 @@
 import React, { useState, useEffect, useRef } from "react";
-import "./styles.css";
+import { withTranslation } from "react-i18next";
+import loadingImage from "assets/loading2x.gif";
 import {
   assertRiddle,
   getNewRiddle,
   NO_RIDDLE,
-} from "../../services/RiddleService.js";
+} from "services/RiddleService.js";
 import Stars from "./Score/index.jsx";
 import Timer from "./Timer/index.jsx";
-import loadingImage from "assets/loading2x.gif";
-import { withTranslation } from "react-i18next";
+import "./styles.css";
 
 function Riddle({ t, i18n }) {
   const MAX_POINTS = 10;

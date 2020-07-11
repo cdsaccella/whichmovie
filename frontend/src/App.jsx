@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
-import "./App.css";
-import Riddle from "./components/Riddle/index.jsx";
-import { Helmet, HelmetProvider } from "react-helmet-async";
-import References from "./components/References/index.jsx";
-import "./i18n";
 import { useTranslation } from "react-i18next";
+import { Helmet, HelmetProvider } from "react-helmet-async";
+import Riddle from "components/Riddle/index.jsx";
+import References from "components/References/index.jsx";
+import i18n from "i18n";
+import "./App.css";
 
 function App() {
   const [languageSelected, setLanguageSelected] = useState(false);
