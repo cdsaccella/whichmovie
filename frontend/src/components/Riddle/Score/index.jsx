@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
-import "./Stars.css";
+import "./styles.css";
 
 function Stars({ stars, maxStars }) {
   const size = useWindowSize();

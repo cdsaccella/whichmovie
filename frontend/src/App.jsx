@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import "./App.css";
-import Riddle from "./components/riddle/Riddle.jsx";
+import Riddle from "./components/Riddle/index.jsx";
 import { Helmet, HelmetProvider } from "react-helmet-async";
-import References from "./components/references/References.jsx";
+import References from "./components/References/index.jsx";
 import "./i18n";
 import { useTranslation } from "react-i18next";
 

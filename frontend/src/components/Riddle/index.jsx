@@ -1,13 +1,13 @@
 import React, { useState, useEffect, useRef } from "react";
-import "./Riddle.css";
+import "./styles.css";
 import {
   assertRiddle,
   getNewRiddle,
   NO_RIDDLE,
 } from "../../services/RiddleService.js";
-import Stars from "./Stars.jsx";
-import Timer from "./Timer.jsx";
-import loadingImage from "../../assets/loading2x.gif";
+import Stars from "./Score/index.jsx";
+import Timer from "./Timer/index.jsx";
+import loadingImage from "assets/loading2x.gif";
 import { withTranslation } from "react-i18next";
 
 function Riddle({ t, i18n }) {
