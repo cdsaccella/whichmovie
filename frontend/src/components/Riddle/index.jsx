@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import { withTranslation } from "react-i18next";
 import loadingImage from "assets/loading2x.gif";
 import {
@@ -19,12 +19,10 @@ function Riddle({ t, i18n }) {
   const [gameOver, setGameOver] = useState(false);
   const [newRiddle, setNewRiddle] = useState(true);
   const [score, setScore] = useState(0);
-  const timerToClearSomewhere = useRef(null);
 
   useEffect(() => {
     if (!newRiddle) return;
     setIsLoading(true);
-    if (timerToClearSomewhere) clearInterval(timerToClearSomewhere.current);
     async function getData() {
       setRiddle(await getNewRiddle(i18n.language));
       setIsLoading(false);
@@ -40,7 +38,6 @@ function Riddle({ t, i18n }) {
       setNewRiddle(true);
     } else {
       setGameOver(true);
-      clearInterval(timerToClearSomewhere.current);
     }
   };
 
@@ -59,7 +56,6 @@ function Riddle({ t, i18n }) {
 
   const riddleTimeout = () => {
     setGameOver(true);
-    clearInterval(timerToClearSomewhere.current);
   };
 
   return (
