@@ -6,7 +6,8 @@ import Timer from "./Timer/index.jsx";
 import Image from "./Image/index.jsx";
 import Restart from "./Restart/index.jsx";
 import "./styles.css";
-import { riddleReducer, EMPTY_STATE } from "reducers/RiddleReducer";
+import { normalModeReducer, EMPTY_STATE } from "reducers/NormalModeReducer";
+import { timeTrialReducer } from "reducers/TimeTrialReducer";
 import { NEW_RIDDLE_REQUESTED, SET_CURRENT_RIDDLE } from "reducers/types.js";
 import RiddleContext from "context/RiddleContext.js";
 import Options from "./Options/index.jsx";
@@ -15,8 +16,13 @@ const settings = {
   timePerRiddle: 200,
 };
 
-function Riddle({ t, i18n }) {
-  const [state, dispatch] = useReducer(riddleReducer, EMPTY_STATE);
+const reducers = {
+  timeTrial: timeTrialReducer,
+  normalMode: normalModeReducer,
+};
+
+function Riddle({ t, i18n, type }) {
+  const [state, dispatch] = useReducer(reducers[type], EMPTY_STATE);
 
   const loadNewRiddle = useCallback(() => {
     dispatch({ type: NEW_RIDDLE_REQUESTED });
