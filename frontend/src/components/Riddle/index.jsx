@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useReducer } from "react";
 import { withTranslation } from "react-i18next";
 import loadingImage from "assets/loading2x.gif";
 import {
@@ -9,59 +9,62 @@ import {
 import Stars from "./Score/index.jsx";
 import Timer from "./Timer/index.jsx";
 import "./styles.css";
+import riddleReducer from "reducers/RiddleReducer";
+import {
+  NEW_RIDDLE_REQUESTED,
+  SET_CURRENT_RIDDLE,
+  SET_CORRECT_ANSWER,
+  SET_WRONG_ANSWER,
+  SET_TIMEOUT,
+  RESET_GAME,
+} from "reducers/types.js";
+
+const settings = {
+  timePerRiddle: 20,
+  scoreLimit: 10,
+};
+
+const initialState = {
+  score: 0,
+  riddle: NO_RIDDLE,
+  gameOver: false,
+  isLoading: false,
+};
 
 function Riddle({ t, i18n }) {
-  const MAX_POINTS = 10;
-  const TIME = 20;
-
-  const [isLoading, setIsLoading] = useState(true);
-  const [riddle, setRiddle] = useState(NO_RIDDLE);
-  const [gameOver, setGameOver] = useState(false);
-  const [score, setScore] = useState(0);
-
-  useEffect(() => {
-    async function getData() {
-      await newRiddle();
-    }
-    getData();
-  }, []);
+  const [state, dispatch] = useReducer(riddleReducer, initialState);
 
   const selectOption = async (option) => {
-    const result = await assertRiddle(riddle.id, option);
+    const result = await assertRiddle(state.riddle.id, option);
     if (result) {
-      setScore((score) => score + 1);
+      dispatch({ type: SET_CORRECT_ANSWER });
       newRiddle();
     } else {
-      setGameOver(true);
+      dispatch({ type: SET_WRONG_ANSWER });
     }
   };
 
-  const newRiddle = async () => {
-    setIsLoading(true);
-    setRiddle(await getNewRiddle(i18n.language));
-    setIsLoading(false);
+  const newRiddle = () => {
+    dispatch({ type: NEW_RIDDLE_REQUESTED });
+    getNewRiddle(i18n.language).then((riddle) =>
+      dispatch({ type: SET_CURRENT_RIDDLE, payload: riddle })
+    );
   };
 
   const restartGame = () => {
-    refreshGame();
+    dispatch({ type: RESET_GAME });
     newRiddle();
   };
 
-  const refreshGame = () => {
-    setRiddle(NO_RIDDLE);
-    setGameOver(false);
-    setScore(0);
-  };
-
-  // ---
-
   const riddleTimeout = () => {
-    setGameOver(true);
+    dispatch({ type: SET_TIMEOUT });
   };
+
+  useEffect(newRiddle, []);
 
   return (
     <>
-      {gameOver && (
+      {state.gameOver && (
         <div className="game-over-wrapper">
           <div>
             <p>{t("Game over")}</p>
@@ -76,21 +79,21 @@ function Riddle({ t, i18n }) {
         </div>
       )}
       <div className="content-wrapper">
-        {!gameOver && (
-          <div className="section">
-            <Timer
-              seconds={TIME}
-              standBy={isLoading}
-              timeoutCallback={() => riddleTimeout()}
-            ></Timer>
-          </div>
+        {!state.gameOver && (
+          <>
+            <div className="section">
+              <Timer
+                seconds={settings.timePerRiddle}
+                standBy={state.isLoading}
+                timeoutCallback={() => riddleTimeout()}
+              ></Timer>
+            </div>
+            <div className="section">
+              <Stars stars={state.score} maxStars={settings.scoreLimit} />
+            </div>
+          </>
         )}
-        {!gameOver && (
-          <div className="section">
-            <Stars stars={score} maxStars={MAX_POINTS} />
-          </div>
-        )}
-        {isLoading && (
+        {state.isLoading && (
           <>
             <div className="section">
               <img className="image-wrapper" src={loadingImage} alt="Loading" />
@@ -98,23 +101,30 @@ function Riddle({ t, i18n }) {
             <p>{t("Loading")}...</p>
           </>
         )}
-        {!gameOver && !isLoading && riddle && riddle.image !== undefined && (
-          <>
-            <img className="image-wrapper" src={riddle.image} alt="Movie" />
-            <div className="button-container">
-              {riddle.options.map((option, index) => (
-                <button
-                  key={index}
-                  type="button"
-                  className="nes-btn"
-                  onClick={() => selectOption(option)}
-                >
-                  {option}
-                </button>
-              ))}
-            </div>
-          </>
-        )}
+        {!state.gameOver &&
+          !state.isLoading &&
+          state.riddle &&
+          state.riddle.image !== undefined && (
+            <>
+              <img
+                className="image-wrapper"
+                src={state.riddle.image}
+                alt="Movie"
+              />
+              <div className="button-container">
+                {state.riddle.options.map((option, index) => (
+                  <button
+                    key={index}
+                    type="button"
+                    className="nes-btn"
+                    onClick={() => selectOption(option)}
+                  >
+                    {option}
+                  </button>
+                ))}
+              </div>
+            </>
+          )}
       </div>
     </>
   );

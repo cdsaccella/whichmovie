@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
+import useWindowSize from "hooks/useWindowSize";
 import PropTypes from "prop-types";
 import "./styles.css";
 
@@ -49,30 +50,3 @@ Stars.propTypes = {
 };
 
 export default Stars;
-
-// Hook
-function useWindowSize() {
-  const isClient = typeof window === "object";
-  const [windowSize, setWindowSize] = useState({
-    width: isClient ? window.innerWidth : undefined,
-    height: isClient ? window.innerHeight : undefined,
-  });
-
-  useEffect(() => {
-    if (!isClient) {
-      return false;
-    }
-
-    function handleResize() {
-      setWindowSize({
-        width: isClient ? window.innerWidth : undefined,
-        height: isClient ? window.innerHeight : undefined,
-      });
-    }
-
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, [isClient]); // Empty array ensures that effect is only run on mount and unmount
-
-  return windowSize;
-}
