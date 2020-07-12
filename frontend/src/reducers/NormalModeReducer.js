@@ -6,8 +6,8 @@ import {
   SET_TIMEOUT,
   SET_ERROR,
   RESET_GAME,
-} from './types.js';
-import Log from 'services/LogService'
+} from './types';
+import Log from '../services/LogService';
 
 export const EMPTY_STATE = {
   score: 0,
@@ -57,4 +57,4 @@ export const normalModeReducer = (state, action) => {
     default:
       return state;
   }
-}
+};

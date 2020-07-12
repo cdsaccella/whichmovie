@@ -6,7 +6,7 @@ import {
   SET_TIMEOUT,
   SET_ERROR,
   RESET_GAME,
-} from './types.js';
+} from './types';
 
 export const EMPTY_STATE = {
   score: 0,
@@ -53,4 +53,4 @@ export const timeTrialReducer = (state, action) => {
     default:
       return state;
   }
-}
+};

@@ -1,22 +1,23 @@
 import debug from 'debug';
 
-const BASE = 'whichmovie-app';
-const COLOURS = {
-  trace: '#92cc41',
-  info: '#209cee',
-  warn: '#f7d51d',
-  error: '#e76e55'
-}; // choose better colours :)
-
 class Log {
+  constructor() {
+    this.BASE = 'whichmovie-app';
+    this.COLOURS = {
+      trace: '#92cc41',
+      info: '#209cee',
+      warn: '#f7d51d',
+      error: '#e76e55',
+    };
+  }
+
   generateMessage(level, message, source) {
-    const namespace = `${BASE}:${level}`;
+    const namespace = `${this.BASE}:${level}`;
     const createDebug = debug(namespace);
 
-    createDebug.color = COLOURS[level];
+    createDebug.color = this.COLOURS[level];
 
-    if (source) { createDebug(source, message); }
-    else { createDebug(message); }
+    if (source) { createDebug(source, message); } else { createDebug(message); }
   }
 
   trace(message, source) {
