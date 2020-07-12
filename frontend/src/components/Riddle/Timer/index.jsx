@@ -1,11 +1,15 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import PropTypes from "prop-types";
+import RiddleContext from "context/RiddleContext.js";
+import { SET_TIMEOUT } from "reducers/types.js";
 
-function Timer({ seconds, standBy, timeoutCallback }) {
+function Timer({ seconds, standBy }) {
   const [color, setColor] = useState("is-success");
   const [warningValue, setWarningValue] = useState();
   const [errorValue, setErrorValue] = useState();
   const [remainingSeconds, setRemainingSeconds] = useState(seconds);
+
+  const { dispatch } = useContext(RiddleContext);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -25,7 +29,7 @@ function Timer({ seconds, standBy, timeoutCallback }) {
 
   useEffect(() => {
     if (remainingSeconds === 0) {
-      timeoutCallback();
+      dispatch({ type: SET_TIMEOUT });
     }
     if (standBy) {
       setRemainingSeconds(seconds);
@@ -33,14 +37,7 @@ function Timer({ seconds, standBy, timeoutCallback }) {
     } else if (remainingSeconds > warningValue) setColor("is-success");
     else if (remainingSeconds > errorValue) setColor("is-warning");
     else setColor("is-error");
-  }, [
-    standBy,
-    seconds,
-    timeoutCallback,
-    remainingSeconds,
-    warningValue,
-    errorValue,
-  ]);
+  }, [standBy, seconds, remainingSeconds, warningValue, errorValue, dispatch]);
 
   return (
     <>
@@ -57,7 +54,6 @@ Timer.propTypes = {
   seconds: PropTypes.number,
   remainingSeconds: PropTypes.number,
   standBy: PropTypes.bool,
-  timeoutCallback: PropTypes.func,
 };
 
 export default Timer;

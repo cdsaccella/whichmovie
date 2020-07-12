@@ -11,9 +11,9 @@ import {
   SET_CURRENT_RIDDLE,
   SET_CORRECT_ANSWER,
   SET_WRONG_ANSWER,
-  SET_TIMEOUT,
   RESET_GAME,
 } from "reducers/types.js";
+import RiddleContext from "context/RiddleContext.js";
 
 const settings = {
   timePerRiddle: 20,
@@ -33,10 +33,6 @@ function Riddle({ t, i18n }) {
     loadNewRiddle();
   };
 
-  const riddleTimeout = () => {
-    dispatch({ type: SET_TIMEOUT });
-  };
-
   const loadNewRiddle = useCallback(() => {
     dispatch({ type: NEW_RIDDLE_REQUESTED });
     getNewRiddle(i18n.language).then((riddle) =>
@@ -44,10 +40,12 @@ function Riddle({ t, i18n }) {
     );
   }, [i18n.language]);
 
+  // get new riddle at start
   useEffect(() => {
     loadNewRiddle();
   }, [loadNewRiddle]);
 
+  // after each response, check if new riddle is needed
   useEffect(() => {
     if (state.resolved && !state.gameOver) {
       loadNewRiddle();
@@ -55,11 +53,14 @@ function Riddle({ t, i18n }) {
   }, [state.resolved, state.gameOver, loadNewRiddle]);
 
   return (
-    <>
+    <RiddleContext.Provider value={{ state, dispatch }}>
       {state.gameOver && (
         <div className="game-over-wrapper">
           <div>
             <p>{t("Game over")}</p>
+            <p>{`${t("Your score was ")} ${state.score} ${t(
+              "riddles guessed."
+            )}`}</p>
             <button
               type="button"
               className="nes-btn"
@@ -77,7 +78,6 @@ function Riddle({ t, i18n }) {
               <Timer
                 seconds={settings.timePerRiddle}
                 standBy={state.isLoading}
-                timeoutCallback={() => riddleTimeout()}
               ></Timer>
             </div>
             <div className="section">
@@ -118,7 +118,7 @@ function Riddle({ t, i18n }) {
             </>
           )}
       </div>
-    </>
+    </RiddleContext.Provider>
   );
 }
 
