@@ -16,6 +16,12 @@
   flex-direction: column;
 }
 
+.row {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
 @media (max-width: 600px) {
   .nes-container {
     padding: 1.5rem 0rem !important;

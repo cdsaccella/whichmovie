@@ -7,7 +7,7 @@ function RiddleImage() {
   const { state } = useContext(RiddleContext);
 
   return (
-    <div>
+    <>
       {state.isLoading || !state.riddle || !state.riddle.image ? (
         <img
           key="loadingImage"
@@ -23,7 +23,7 @@ function RiddleImage() {
           alt="Movie"
         />
       )}
-    </div>
+    </>
   );
 }
 

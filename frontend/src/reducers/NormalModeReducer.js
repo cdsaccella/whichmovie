@@ -7,6 +7,7 @@ import {
   SET_ERROR,
   RESET_GAME,
 } from './types.js';
+import Log from 'services/LogService'
 
 export const EMPTY_STATE = {
   score: 0,
@@ -17,6 +18,7 @@ export const EMPTY_STATE = {
 };
 
 export const normalModeReducer = (state, action) => {
+  Log.info(action, 'Normal Mode Reducer');
   switch (action.type) {
     case NEW_RIDDLE_REQUESTED:
       return {
