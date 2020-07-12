@@ -4,14 +4,15 @@ import "./styles.css";
 
 function Stars({ stars }) {
   return (
-    <div>
+    <div className="score-container">
       <i
         className={
-          "nes-icon is-large star custom-star " +
+          "nes-icon is-medium star custom-star " +
           (stars === 0 ? "is-empty" : String.empty)
         }
       ></i>
-      <span className="score"> x {stars}</span>
+      <span className="score-cross">x</span>
+      <span className="score-points">{stars}</span>
     </div>
   );
 }
