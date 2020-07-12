@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import RiddleContext from "context/RiddleContext";
 import loadingImage from "assets/loading2x.gif";
 import "./styles.css";
@@ -6,24 +6,28 @@ import "./styles.css";
 function RiddleImage() {
   const { state } = useContext(RiddleContext);
 
+  const [source, setSource] = useState(null);
+
+  useEffect(() => {
+    if (state.isLoading) {
+      setSource(null);
+      return;
+    }
+    if (state.riddle.image) {
+      const imageLoader = new Image();
+      imageLoader.src = state.riddle.image;
+      imageLoader.onload = () => {
+        console.log(imageLoader.height);
+        setSource(state.riddle.image);
+      };
+    }
+  }, [state.isLoading, state.riddle]);
+
   return (
-    <>
-      {state.isLoading || !state.riddle || !state.riddle.image ? (
-        <img
-          key="loadingImage"
-          className="image-wrapper"
-          src={loadingImage}
-          alt="Loading"
-        />
-      ) : (
-        <img
-          key="movieImage"
-          className="image-wrapper"
-          src={state.riddle.image}
-          alt="Movie"
-        />
-      )}
-    </>
+    <div
+      className="image-wrapper"
+      style={{ backgroundImage: `url(${source || loadingImage})` }}
+    />
   );
 }
 

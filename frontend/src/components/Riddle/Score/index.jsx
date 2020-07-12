@@ -7,7 +7,7 @@ function Stars({ stars }) {
     <div className="score-container">
       <i
         className={
-          "nes-icon is-medium star custom-star " +
+          "nes-icon star custom-star " +
           (stars === 0 ? "is-empty" : String.empty)
         }
       ></i>
