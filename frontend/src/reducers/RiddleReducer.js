@@ -8,14 +8,15 @@ import {
   RESET_GAME,
 } from './types.js';
 
-const EMPTY_STATE = {
+export const EMPTY_STATE = {
   score: 0,
   riddle: {},
   gameOver: false,
   isLoading: false,
+  resolved: false,
 };
 
-function riddleReducer(state, action) {
+export const riddleReducer = (state, action) => {
   switch (action.type) {
     case NEW_RIDDLE_REQUESTED:
       return {
@@ -27,21 +28,25 @@ function riddleReducer(state, action) {
         ...state,
         riddle: action.payload,
         isLoading: false,
+        resolved: false,
       };
     case SET_CORRECT_ANSWER:
       return {
         ...state,
         score: state.score + 1,
+        resolved: true,
       };
     case SET_WRONG_ANSWER:
       return {
         ...state,
         gameOver: true,
+        resolved: true,
       };
     case SET_TIMEOUT:
       return {
         ...state,
         gameOver: true,
+        resolved: true,
       };
     case SET_ERROR:
       return EMPTY_STATE;
@@ -51,5 +56,3 @@ function riddleReducer(state, action) {
       return state;
   }
 }
-
-export default riddleReducer;
