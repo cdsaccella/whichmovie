@@ -32,7 +32,7 @@ function Options() {
     <div className="button-container">
       {options.map((option, index) => (
         <button
-          key={index}
+          key={option + index}
           type="button"
           className="nes-btn"
           onClick={() => selectOption(option)}

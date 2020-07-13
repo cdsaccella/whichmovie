@@ -13,7 +13,7 @@ import Options from "./Options/index.jsx";
 import Log from "services/LogService";
 
 const settings = {
-  timePerRiddle: 200,
+  timePerRiddle: 20,
 };
 
 const reducers = {
