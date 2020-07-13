@@ -4,6 +4,7 @@ import "./index.css";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 import "./nes.css/css/nes.min.css";
+import "./nes.css/css/icons.css";
 import "./nes.css/fonts/press-start-2p.css";
 
 if (process.env.NODE_ENV !== "production") {

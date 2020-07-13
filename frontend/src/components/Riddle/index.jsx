@@ -1,9 +1,8 @@
 import React, { useEffect, useReducer, useCallback } from "react";
 import { withTranslation } from "react-i18next";
 import { getNewRiddle } from "services/RiddleService.js";
-import Stars from "./Score/index.jsx";
-import Timer from "./Timer/index.jsx";
 import Image from "./Image/index.jsx";
+import HUD from "./HUD/index.jsx";
 import Restart from "./Restart/index.jsx";
 import "./styles.css";
 import { normalModeReducer, EMPTY_STATE } from "reducers/NormalModeReducer";
@@ -51,16 +50,13 @@ function Riddle({ t, i18n, type }) {
   }, [state.resolved, state.gameOver, loadNewRiddle]);
 
   return (
-    <RiddleContext.Provider value={{ state, dispatch }}>
+    <RiddleContext.Provider value={{ settings, state, dispatch }}>
       <div className={state.gameOver ? "game-over-wrapper" : "content-wrapper"}>
         {state.gameOver ? (
           <Restart loadNewRiddle={() => loadNewRiddle()}></Restart>
         ) : (
           <div className="sections">
-            <div className="row">
-              <Timer seconds={settings.timePerRiddle} type="progress"></Timer>
-              <Stars stars={state.score} />
-            </div>
+            <HUD></HUD>
             <Image></Image>
             <Options></Options>
           </div>

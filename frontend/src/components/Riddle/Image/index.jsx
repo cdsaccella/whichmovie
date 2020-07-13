@@ -17,7 +17,6 @@ function RiddleImage() {
       const imageLoader = new Image();
       imageLoader.src = state.riddle.image;
       imageLoader.onload = () => {
-        console.log(imageLoader.height);
         setSource(state.riddle.image);
       };
     }
