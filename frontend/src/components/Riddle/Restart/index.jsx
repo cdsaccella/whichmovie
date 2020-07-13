@@ -16,7 +16,7 @@ function Restart({ loadNewRiddle, t }) {
   return (
     <div>
       <p>{t("Game over")}</p>
-      <p>{`${t("Your score was ")} ${state.score} ${t("riddles guessed.")}`}</p>
+      <p>{`${t("Your score is")} ${state.score}.`}</p>
       <button type="button" className="nes-btn" onClick={() => restartGame()}>
         {t("Restart game")}
       </button>
