@@ -1,0 +1,10 @@
+.HUD-item-container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+}
+
+.HUD-item-separator {
+  padding: 0 0.25rem;
+  font-size: 1rem;
+}
