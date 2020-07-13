@@ -1,16 +1,21 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import * as serviceWorker from './serviceWorker';
-import "./nes.css/css/nes.min.css";
-import "./nes.css/fonts/press-start-2p.css"
+import React from "react";
+import ReactDOM from "react-dom";
+import "./index.css";
+import App from "./App";
+import * as serviceWorker from "./serviceWorker";
+import "./styles/nes.css/css/nes.min.css";
+import "./styles/nes.css/css/icons.css";
+import "./styles/nes.css/fonts/press-start-2p.css";
+
+if (process.env.NODE_ENV !== "production") {
+  localStorage.setItem("debug", "whichmovie-app:*");
+}
 
 ReactDOM.render(
   <React.StrictMode>
     <App />
   </React.StrictMode>,
-  document.getElementById('root')
+  document.getElementById("root")
 );
 
 // If you want your app to work offline and load faster, you can change

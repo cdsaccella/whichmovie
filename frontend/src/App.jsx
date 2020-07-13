@@ -47,7 +47,7 @@ function App() {
         {languageSelected && (
           <header className="App-header App-section">
             <GameWrapper title={t("Try it!")}>
-              <Riddle i18n={i18n}></Riddle>
+              <Riddle i18n={i18n} type="normalMode"></Riddle>
             </GameWrapper>
           </header>
         )}

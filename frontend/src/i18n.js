@@ -9,7 +9,8 @@ const resources = {
       'Try it!': 'Try it!',
       'Restart game': 'Restart game',
       'Game over': 'You lost!',
-      Loading: 'Loading',
+      'Loading': 'Loading',
+      'Your score is': 'Your score is',
     },
   },
   es: {
@@ -17,7 +18,8 @@ const resources = {
       'Try it!': 'Inténtalo!',
       'Restart game': 'Jugar de nuevo',
       'Game over': 'Perdiste!',
-      Loading: 'Cargando',
+      'Loading': 'Cargando',
+      'Your score is': 'Tu puntaje es',
     },
   },
   de: {
@@ -25,7 +27,8 @@ const resources = {
       'Try it!': 'Versuch es',
       'Restart game': 'Neustart',
       'Game over': 'Das spiel ist aus',
-      Loading: 'Wird geladen',
+      'Loading': 'Wird geladen',
+      'Your score is': 'Dein Ergebnis ist',
     },
   },
   fr: {
@@ -33,7 +36,8 @@ const resources = {
       'Try it!': 'Essayez-le!',
       'Restart game': 'Recommencer le jeu',
       'Game over': 'Jeu terminé',
-      Loading: 'Chargement',
+      'Loading': 'Chargement',
+      'Your score is': 'Votre score est',
     },
   },
   it: {
@@ -41,7 +45,8 @@ const resources = {
       'Try it!': 'Provalo',
       'Restart game': 'Riprova',
       'Game over': 'Gioco finito',
-      Loading: 'Caricamento in corso',
+      'Loading': 'Caricamento in corso',
+      'Your score is': 'Il tuo punteggio è',
     },
   },
   zh: {
@@ -49,7 +54,8 @@ const resources = {
       'Try it!': '试试吧',
       'Restart game': '重新开始游戏',
       'Game over': '游戏结束',
-      Loading: '装货',
+      'Loading': '装货',
+      'Your score is': '你的分数是',
     },
   },
 };

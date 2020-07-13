@@ -1,0 +1,16 @@
+.image-wrapper {
+  width: 100%;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  height: 0;
+  padding-bottom: 56.2% !important;
+}
+
+@media (max-width: 600px) {
+  .image-wrapper {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+  }
+}
