@@ -7,9 +7,8 @@ export default async ({ request, response }) => {
         return;
     }
 
-    const {
-        value: { riddle, option }
-    } = await request.body();
+    const { value } = await request.body();
+    const { riddle, option } = await value;
 
     if (!riddle || !option) {
         response.status = 422;
