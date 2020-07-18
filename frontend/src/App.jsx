@@ -12,7 +12,7 @@ import { gameModeReducer } from "reducers/GameModeReducer";
 import { GAME_MODE_EMPTY_STATE } from "reducers/defaults";
 
 function App() {
-  // const [languageSelected, setLanguageSelected] = useState(false);
+  const [languageSelected, setLanguageSelected] = useState(false);
 
   const { t, i18n } = useTranslation();
 
@@ -25,10 +25,10 @@ function App() {
   //   { icon: "🇨🇳", text: "普通话", value: "zh" },
   // ];
 
-  const [gameModeState, dispatchGameMode] = useReducer(
-    gameModeReducer,
-    GAME_MODE_EMPTY_STATE
-  );
+  // const [gameModeState, dispatchGameMode] = useReducer(
+  //   gameModeReducer,
+  //   GAME_MODE_EMPTY_STATE
+  // );
 
   const selectLanguage = (e) => {
     i18n.changeLanguage(e.target.value);
