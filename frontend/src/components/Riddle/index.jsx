@@ -1,28 +1,23 @@
-import React, { useEffect, useReducer, useCallback } from "react";
+import React, { useEffect, useReducer, useCallback, useContext } from "react";
 import { withTranslation } from "react-i18next";
 import { getNewRiddle } from "services/RiddleService.js";
 import Image from "./Image/index.jsx";
 import HUD from "./HUD/index.jsx";
 import Restart from "./Restart/index.jsx";
 import "./styles.css";
-import { normalModeReducer, EMPTY_STATE } from "reducers/NormalModeReducer";
-import { timeTrialReducer } from "reducers/TimeTrialReducer";
 import { NEW_RIDDLE_REQUESTED, SET_CURRENT_RIDDLE } from "reducers/types.js";
 import RiddleContext from "context/RiddleContext.js";
 import Options from "./Options/index.jsx";
 import Log from "services/LogService";
-
-const settings = {
-  timePerRiddle: 20,
-};
-
-const reducers = {
-  timeTrial: timeTrialReducer,
-  normalMode: normalModeReducer,
-};
+import GameModeContext from "context/GameModeContext.js";
+import { IN_GAME_EMPTY_STATE } from "reducers/defaults";
 
 function Riddle({ t, i18n, type }) {
-  const [state, dispatch] = useReducer(reducers[type], EMPTY_STATE);
+  const { gameModeState } = useContext(GameModeContext);
+  const [state, dispatch] = useReducer(
+    gameModeState.inGameReducer,
+    IN_GAME_EMPTY_STATE
+  );
 
   const loadNewRiddle = useCallback(() => {
     Log.trace("Calling new riddle", Riddle.name);
@@ -50,7 +45,7 @@ function Riddle({ t, i18n, type }) {
   }, [state.resolved, state.gameOver, loadNewRiddle]);
 
   return (
-    <RiddleContext.Provider value={{ settings, state, dispatch }}>
+    <RiddleContext.Provider value={{ state, dispatch }}>
       <div className={state.gameOver ? "game-over-wrapper" : "content-wrapper"}>
         {state.gameOver ? (
           <Restart loadNewRiddle={() => loadNewRiddle()}></Restart>

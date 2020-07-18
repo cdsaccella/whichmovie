@@ -1,11 +1,19 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useReducer } from "react";
 import { useTranslation } from "react-i18next";
 import { Helmet, HelmetProvider } from "react-helmet-async";
 import Riddle from "components/Riddle/index.jsx";
+import ModeSelector from "components/ModeSelector/index.jsx";
 import References from "components/References/index.jsx";
 import "i18n";
 import "./App.css";
 import GameWrapper from "./components/GameWrapper/index.jsx";
+import GameModeContext from "context/GameModeContext.js";
+import GameSettingsContext from "context/GameSettingsContext.js";
+import { gameModeReducer } from "reducers/GameModeReducer";
+import {
+  GAME_MODE_EMPTY_STATE,
+  GAME_SETTINGS_EMPTY_STATE,
+} from "reducers/defaults";
 
 function App() {
   const [languageSelected, setLanguageSelected] = useState(false);
@@ -21,8 +29,21 @@ function App() {
     { icon: "🇨🇳", text: "普通话", value: "zh" },
   ];
 
+  const [gameModeState, dispatchGameMode] = useReducer(
+    gameModeReducer,
+    GAME_MODE_EMPTY_STATE
+  );
+
+  const [gameSettingsState, setGameSettings] = useState(
+    GAME_SETTINGS_EMPTY_STATE
+  );
+
   const selectLanguage = (e) => {
     i18n.changeLanguage(e.target.value);
+    setLanguageSelected(true);
+  };
+
+  const startGame = (e) => {
     setLanguageSelected(true);
   };
 
@@ -44,18 +65,22 @@ function App() {
           <meta charSet="utf-8" />
           <title>Which movie?</title>
         </Helmet>
-        {languageSelected && (
-          <header className="App-header App-section">
-            <GameWrapper title={t("Try it!")}>
-              <Riddle i18n={i18n} type="normalMode"></Riddle>
-            </GameWrapper>
-          </header>
-        )}
-        {!languageSelected && (
-          <>
-            <header className="App-header App-section">
-              <GameWrapper title="Select language">
-                <div className="language-selection">
+        <GameModeContext.Provider value={{ gameModeState, dispatchGameMode }}>
+          <GameSettingsContext.Provider
+            value={{ gameSettingsState, setGameSettings }}
+          >
+            {languageSelected && (
+              <header className="App-header App-section">
+                <GameWrapper title={t("Try it!")}>
+                  <Riddle i18n={i18n} type="normalMode"></Riddle>
+                </GameWrapper>
+              </header>
+            )}
+            {!languageSelected && (
+              <>
+                <header className="App-header App-section">
+                  <GameWrapper title="Select language">
+                    {/* <div className="language-selection">
                   {languageList.map((language) => (
                     <button
                       key={language.value}
@@ -69,14 +94,17 @@ function App() {
                       &nbsp;{language.text}
                     </button>
                   ))}
+                </div> */}
+                    <ModeSelector finished={startGame}></ModeSelector>
+                  </GameWrapper>
+                </header>
+                <div className="App-section App-footer">
+                  <References />
                 </div>
-              </GameWrapper>
-            </header>
-            <div className="App-section App-footer">
-              <References />
-            </div>
-          </>
-        )}
+              </>
+            )}
+          </GameSettingsContext.Provider>
+        </GameModeContext.Provider>
       </div>
     </HelmetProvider>
   );

@@ -1,4 +1,7 @@
 import {
+  SET_EASY,
+  SET_MEDIUM,
+  SET_HARD,
   NEW_RIDDLE_REQUESTED,
   SET_CURRENT_RIDDLE,
   SET_CORRECT_ANSWER,
@@ -7,16 +10,9 @@ import {
   SET_ERROR,
   RESET_GAME,
 } from './types';
+import { IN_GAME_EMPTY_STATE } from './defaults';
 
-export const EMPTY_STATE = {
-  score: 0,
-  riddle: {},
-  gameOver: false,
-  isLoading: false,
-  resolved: false,
-};
-
-export const timeTrialReducer = (state, action) => {
+export const timeTrialInGameReducer = (state, action) => {
   switch (action.type) {
     case NEW_RIDDLE_REQUESTED:
       return {
@@ -47,9 +43,9 @@ export const timeTrialReducer = (state, action) => {
         resolved: true,
       };
     case SET_ERROR:
-      return EMPTY_STATE;
+      return IN_GAME_EMPTY_STATE;
     case RESET_GAME:
-      return EMPTY_STATE;
+      return IN_GAME_EMPTY_STATE;
     default:
       return state;
   }
