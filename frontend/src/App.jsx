@@ -8,7 +8,7 @@ import "i18n";
 import "./App.css";
 import GameWrapper from "./components/GameWrapper/index.jsx";
 import GameModeContext from "context/GameModeContext.js";
-import { gameModeReducer } from "reducers/GameModeReducer";
+import gameModeReducer from "reducers/GameModeReducer";
 import { GAME_MODE_EMPTY_STATE } from "reducers/defaults";
 
 function App() {

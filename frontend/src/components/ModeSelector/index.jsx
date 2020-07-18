@@ -3,7 +3,7 @@ import { SET_CLASSIC_MODE, SET_TIME_TRIAL_MODE } from "reducers/types";
 import GameModeContext from "context/GameModeContext.js";
 
 function ModeSelector({ finished }) {
-  const { gameModeState, dispatchGameMode } = useContext(GameModeContext);
+  const { dispatchGameMode } = useContext(GameModeContext);
 
   const gameModes = [
     { text: "Classic mode", action: SET_CLASSIC_MODE },

@@ -21,7 +21,7 @@ function Timer({ seconds, type }) {
     return () => {
       clearInterval(interval);
     };
-  }, [state.isLoading]);
+  }, [state.isLoading, dispatch, state.isPlaying]);
 
   useEffect(() => {
     setWarningValue(seconds * 0.6);
@@ -42,6 +42,7 @@ function Timer({ seconds, type }) {
     state.isLoading,
     seconds,
     state.time,
+    state.isPlaying,
     warningValue,
     errorValue,
     dispatch,

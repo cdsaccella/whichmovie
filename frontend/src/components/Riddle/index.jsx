@@ -40,7 +40,11 @@ function Riddle({ t, i18n, type }) {
       payload: gameModeState.difficultyOptions[gameModeState.difficulty],
     });
     loadNewRiddle();
-  }, [loadNewRiddle]);
+  }, [
+    loadNewRiddle,
+    gameModeState.difficultyOptions,
+    gameModeState.difficulty,
+  ]);
 
   // after each answer, check if new riddle is needed
   useEffect(() => {
