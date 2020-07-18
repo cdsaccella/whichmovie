@@ -25,15 +25,15 @@ function App() {
   //   { icon: "🇨🇳", text: "普通话", value: "zh" },
   // ];
 
-  // const [gameModeState, dispatchGameMode] = useReducer(
-  //   gameModeReducer,
-  //   GAME_MODE_EMPTY_STATE
-  // );
+  const [gameModeState, dispatchGameMode] = useReducer(
+    gameModeReducer,
+    GAME_MODE_EMPTY_STATE
+  );
 
-  const selectLanguage = (e) => {
-    i18n.changeLanguage(e.target.value);
-    setLanguageSelected(true);
-  };
+  // const selectLanguage = (e) => {
+  //   i18n.changeLanguage(e.target.value);
+  //   setLanguageSelected(true);
+  // };
 
   const startGame = (e) => {
     setLanguageSelected(true);
