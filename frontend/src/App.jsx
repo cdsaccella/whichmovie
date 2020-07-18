@@ -9,24 +9,21 @@ import "./App.css";
 import GameWrapper from "./components/GameWrapper/index.jsx";
 import GameModeContext from "context/GameModeContext.js";
 import { gameModeReducer } from "reducers/GameModeReducer";
-import {
-  GAME_MODE_EMPTY_STATE,
-  GAME_SETTINGS_EMPTY_STATE,
-} from "reducers/defaults";
+import { GAME_MODE_EMPTY_STATE } from "reducers/defaults";
 
 function App() {
-  const [languageSelected, setLanguageSelected] = useState(false);
+  // const [languageSelected, setLanguageSelected] = useState(false);
 
   const { t, i18n } = useTranslation();
 
-  const languageList = [
-    { icon: "🇩🇪", text: "Deutsch", value: "de" },
-    { icon: "🇬🇧", text: "English", value: "en" },
-    { icon: "🇪🇸", text: "Español", value: "es" },
-    { icon: "🇫🇷", text: "Français", value: "fr" },
-    { icon: "🇮🇹", text: "Italiano", value: "it" },
-    { icon: "🇨🇳", text: "普通话", value: "zh" },
-  ];
+  // const languageList = [
+  //   { icon: "🇩🇪", text: "Deutsch", value: "de" },
+  //   { icon: "🇬🇧", text: "English", value: "en" },
+  //   { icon: "🇪🇸", text: "Español", value: "es" },
+  //   { icon: "🇫🇷", text: "Français", value: "fr" },
+  //   { icon: "🇮🇹", text: "Italiano", value: "it" },
+  //   { icon: "🇨🇳", text: "普通话", value: "zh" },
+  // ];
 
   const [gameModeState, dispatchGameMode] = useReducer(
     gameModeReducer,

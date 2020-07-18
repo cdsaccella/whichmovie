@@ -1,7 +1,4 @@
 import {
-  SET_EASY,
-  SET_NORMAL,
-  SET_HARD,
   NEW_RIDDLE_REQUESTED,
   SET_CURRENT_RIDDLE,
   SET_CORRECT_ANSWER,
@@ -12,7 +9,7 @@ import {
   SET_TICK,
   SET_SETTINGS
 } from './types';
-import { GAME_SETTINGS_EMPTY_STATE, IN_GAME_EMPTY_STATE } from './defaults';
+import { IN_GAME_EMPTY_STATE } from './defaults';
 import Log from '../services/LogService';
 
 export const classicModeDifficultyOptions = {
