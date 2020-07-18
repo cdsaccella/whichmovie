@@ -9,6 +9,8 @@ export const SET_WRONG_ANSWER = 'SET_WRONG_ANSWER';
 export const SET_TIMEOUT = 'SET_TIMEOUT';
 export const SET_ERROR = 'SET_ERROR';
 export const RESET_GAME = 'RESET_GAME';
+export const SET_TICK = 'SET_TICK';
+export const SET_SETTINGS = 'SET_SETTINGS';
 
 export const SET_LANGUAGE = 'SET_LANGUAGE';
 

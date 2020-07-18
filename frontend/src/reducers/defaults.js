@@ -12,7 +12,10 @@ export const GAME_SETTINGS_EMPTY_STATE = {
 };
 
 export const IN_GAME_EMPTY_STATE = {
+  time: 0,
+  lives: 0,
   score: 0,
+  isPlaying: false,
   riddle: {
     options: [],
   },

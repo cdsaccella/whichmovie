@@ -9,49 +9,52 @@ import {
   SET_TIMEOUT,
   SET_ERROR,
   RESET_GAME,
+  SET_TICK,
+  SET_SETTINGS
 } from './types';
 import { GAME_SETTINGS_EMPTY_STATE, IN_GAME_EMPTY_STATE } from './defaults';
 import Log from '../services/LogService';
 
-export const classicModeDifficultyReducer = (state, action) => {
-  Log.info(action, 'Classic Mode Difficulty Reducer');
-  switch (action.type) {
-    case SET_EASY:
-      return {
-        ...state,
-        time: 60,
-        lives: 5,
-        options: 4,
-        dimensions: 0,
-      };
-    case SET_NORMAL:
-      return {
-        ...state,
-        time: 120,
-        lives: 3,
-        options: 6,
-        dimensions: 0,
-      };
-    case SET_HARD:
-      return {
-        ...state,
-        time: 10,
-        lives: 1,
-        options: 8,
-        dimensions: 0,
-      };
-    default:
-      return GAME_SETTINGS_EMPTY_STATE;
+export const classicModeDifficultyOptions = {
+  easy: {
+    time: 60,
+    lives: 5,
+    options: 4,
+    dimensions: 0,
+  },
+  medium: {
+    time: 20,
+    lives: 3,
+    options: 6,
+    dimensions: 0,
+  },
+  hard: {
+    time: 10,
+    lives: 1,
+    options: 8,
+    dimensions: 0,
   }
-}
+};
 
 export const classicModeInGameReducer = (state, action) => {
   Log.info(action, 'Classic Mode In Game Reducer');
   switch (action.type) {
+    case SET_TICK:
+      return {
+        ...state,
+        time: state.time - 1,
+      };
+    case SET_SETTINGS:
+      return {
+        ...state,
+        time: action.payload.time,
+        lives: action.payload.lives,
+      };
     case NEW_RIDDLE_REQUESTED:
       return {
         ...state,
         isLoading: true,
+        isPlaying: false,
       };
     case SET_CURRENT_RIDDLE:
       return {
@@ -59,29 +62,37 @@ export const classicModeInGameReducer = (state, action) => {
         riddle: action.payload,
         isLoading: false,
         resolved: false,
+        isPlaying: true,
       };
     case SET_CORRECT_ANSWER:
       return {
         ...state,
         score: state.score + 1,
         resolved: true,
+        isPlaying: false,
       };
     case SET_WRONG_ANSWER:
       return {
         ...state,
         gameOver: true,
         resolved: true,
+        isPlaying: false,
       };
     case SET_TIMEOUT:
       return {
         ...state,
         gameOver: true,
         resolved: true,
+        isPlaying: false,
       };
     case SET_ERROR:
       return IN_GAME_EMPTY_STATE;
     case RESET_GAME:
-      return IN_GAME_EMPTY_STATE;
+      return {
+        ...IN_GAME_EMPTY_STATE,
+        time: action.payload.time,
+        lives: action.payload.lives
+      };
     default:
       return state;
   }

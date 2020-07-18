@@ -5,7 +5,11 @@ import Image from "./Image/index.jsx";
 import HUD from "./HUD/index.jsx";
 import Restart from "./Restart/index.jsx";
 import "./styles.css";
-import { NEW_RIDDLE_REQUESTED, SET_CURRENT_RIDDLE } from "reducers/types.js";
+import {
+  NEW_RIDDLE_REQUESTED,
+  SET_CURRENT_RIDDLE,
+  SET_SETTINGS,
+} from "reducers/types.js";
 import RiddleContext from "context/RiddleContext.js";
 import Options from "./Options/index.jsx";
 import Log from "services/LogService";
@@ -31,6 +35,10 @@ function Riddle({ t, i18n, type }) {
   // get new riddle at start
   useEffect(() => {
     Log.trace("Getting first riddle", Riddle.name);
+    dispatch({
+      type: SET_SETTINGS,
+      payload: gameModeState.difficultyOptions[gameModeState.difficulty],
+    });
     loadNewRiddle();
   }, [loadNewRiddle]);
 

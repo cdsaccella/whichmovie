@@ -12,7 +12,6 @@ function ModeSelector({ finished }) {
 
   const handleClick = (action) => {
     dispatchGameMode({ type: action });
-    console.log(gameModeState);
     finished();
   };
 

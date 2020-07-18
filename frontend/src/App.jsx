@@ -8,7 +8,6 @@ import "i18n";
 import "./App.css";
 import GameWrapper from "./components/GameWrapper/index.jsx";
 import GameModeContext from "context/GameModeContext.js";
-import GameSettingsContext from "context/GameSettingsContext.js";
 import { gameModeReducer } from "reducers/GameModeReducer";
 import {
   GAME_MODE_EMPTY_STATE,
@@ -32,10 +31,6 @@ function App() {
   const [gameModeState, dispatchGameMode] = useReducer(
     gameModeReducer,
     GAME_MODE_EMPTY_STATE
-  );
-
-  const [gameSettingsState, setGameSettings] = useState(
-    GAME_SETTINGS_EMPTY_STATE
   );
 
   const selectLanguage = (e) => {
@@ -66,21 +61,18 @@ function App() {
           <title>Which movie?</title>
         </Helmet>
         <GameModeContext.Provider value={{ gameModeState, dispatchGameMode }}>
-          <GameSettingsContext.Provider
-            value={{ gameSettingsState, setGameSettings }}
-          >
-            {languageSelected && (
+          {languageSelected && (
+            <header className="App-header App-section">
+              <GameWrapper title={t("Try it!")}>
+                <Riddle i18n={i18n} type="normalMode"></Riddle>
+              </GameWrapper>
+            </header>
+          )}
+          {!languageSelected && (
+            <>
               <header className="App-header App-section">
-                <GameWrapper title={t("Try it!")}>
-                  <Riddle i18n={i18n} type="normalMode"></Riddle>
-                </GameWrapper>
-              </header>
-            )}
-            {!languageSelected && (
-              <>
-                <header className="App-header App-section">
-                  <GameWrapper title="Select language">
-                    {/* <div className="language-selection">
+                <GameWrapper title="Select language">
+                  {/* <div className="language-selection">
                   {languageList.map((language) => (
                     <button
                       key={language.value}
@@ -95,15 +87,14 @@ function App() {
                     </button>
                   ))}
                 </div> */}
-                    <ModeSelector finished={startGame}></ModeSelector>
-                  </GameWrapper>
-                </header>
-                <div className="App-section App-footer">
-                  <References />
-                </div>
-              </>
-            )}
-          </GameSettingsContext.Provider>
+                  <ModeSelector finished={startGame}></ModeSelector>
+                </GameWrapper>
+              </header>
+              <div className="App-section App-footer">
+                <References />
+              </div>
+            </>
+          )}
         </GameModeContext.Provider>
       </div>
     </HelmetProvider>
