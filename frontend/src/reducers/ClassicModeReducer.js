@@ -7,7 +7,7 @@ import {
   SET_ERROR,
   RESET_GAME,
   SET_TICK,
-  SET_SETTINGS
+  SET_SETTINGS,
 } from './types';
 import { IN_GAME_EMPTY_STATE } from './defaults';
 import Log from '../services/LogService';
@@ -30,7 +30,7 @@ export const classicModeDifficultyOptions = {
     lives: 1,
     options: 8,
     dimensions: 0,
-  }
+  },
 };
 
 export const classicModeInGameReducer = (state, action) => {
@@ -88,7 +88,7 @@ export const classicModeInGameReducer = (state, action) => {
       return {
         ...IN_GAME_EMPTY_STATE,
         time: action.payload.time,
-        lives: action.payload.lives
+        lives: action.payload.lives,
       };
     default:
       return state;

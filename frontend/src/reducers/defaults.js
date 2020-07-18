@@ -2,7 +2,7 @@ export const GAME_MODE_EMPTY_STATE = {
   title: '',
   inGameReducer: {},
   difficultyReducer: {},
-}
+};
 
 export const IN_GAME_EMPTY_STATE = {
   time: 0,

@@ -1,7 +1,4 @@
 import {
-  SET_EASY,
-  SET_MEDIUM,
-  SET_HARD,
   NEW_RIDDLE_REQUESTED,
   SET_CURRENT_RIDDLE,
   SET_CORRECT_ANSWER,
@@ -10,7 +7,7 @@ import {
   SET_ERROR,
   RESET_GAME,
   SET_TICK,
-  SET_SETTINGS
+  SET_SETTINGS,
 } from './types';
 import { IN_GAME_EMPTY_STATE } from './defaults';
 
@@ -32,7 +29,7 @@ export const timeTrialModeDifficultyOptions = {
     lives: 1,
     options: 8,
     dimensions: 0,
-  }
+  },
 };
 
 export const timeTrialInGameReducer = (state, action) => {
@@ -88,7 +85,7 @@ export const timeTrialInGameReducer = (state, action) => {
       return {
         ...IN_GAME_EMPTY_STATE,
         time: action.payload.time,
-        lives: action.payload.lives
+        lives: action.payload.lives,
       };
     default:
       return state;
