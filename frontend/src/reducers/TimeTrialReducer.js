@@ -17,18 +17,21 @@ export const timeTrialModeDifficultyOptions = {
     lives: 5,
     options: 4,
     dimensions: 0,
+    timeCost: 1,
   },
   medium: {
     time: 60,
     lives: 3,
     options: 6,
     dimensions: 0,
+    timeCost: 3,
   },
   hard: {
     time: 30,
     lives: 1,
     options: 8,
     dimensions: 0,
+    timeCost: 5,
   },
 };
 
@@ -44,6 +47,7 @@ export const timeTrialInGameReducer = (state, action) => {
         ...state,
         time: action.payload.time,
         lives: action.payload.lives,
+        timeDiscount: action.payload.timeCost,
       };
     case NEW_RIDDLE_REQUESTED:
       return {
@@ -71,6 +75,7 @@ export const timeTrialInGameReducer = (state, action) => {
         ...state,
         resolved: true,
         isPlaying: false,
+        time: state.time - state.timeDiscount,
       };
     case SET_TIMEOUT:
       return {

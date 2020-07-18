@@ -62,11 +62,11 @@ function Riddle({ t, i18n, type }) {
         {state.gameOver ? (
           <Restart loadNewRiddle={() => loadNewRiddle()}></Restart>
         ) : (
-          <div className="sections">
+          <>
             <HUD></HUD>
             <Image></Image>
             <Options></Options>
-          </div>
+          </>
         )}
       </div>
     </RiddleContext.Provider>

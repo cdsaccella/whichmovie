@@ -2,7 +2,7 @@ import React, { useState, useEffect, useReducer } from "react";
 import { useTranslation } from "react-i18next";
 import { Helmet, HelmetProvider } from "react-helmet-async";
 import Riddle from "components/Riddle/index.jsx";
-import ModeSelector from "components/ModeSelector/index.jsx";
+import GameSettings from "components/GameSettings/index.jsx";
 import References from "components/References/index.jsx";
 import "i18n";
 import "./App.css";
@@ -16,26 +16,13 @@ function App() {
 
   const { t, i18n } = useTranslation();
 
-  // const languageList = [
-  //   { icon: "🇩🇪", text: "Deutsch", value: "de" },
-  //   { icon: "🇬🇧", text: "English", value: "en" },
-  //   { icon: "🇪🇸", text: "Español", value: "es" },
-  //   { icon: "🇫🇷", text: "Français", value: "fr" },
-  //   { icon: "🇮🇹", text: "Italiano", value: "it" },
-  //   { icon: "🇨🇳", text: "普通话", value: "zh" },
-  // ];
-
   const [gameModeState, dispatchGameMode] = useReducer(
     gameModeReducer,
     GAME_MODE_EMPTY_STATE
   );
 
-  // const selectLanguage = (e) => {
-  //   i18n.changeLanguage(e.target.value);
-  //   setLanguageSelected(true);
-  // };
-
-  const startGame = (e) => {
+  const startGame = () => {
+    console.log("starting game");
     setLanguageSelected(true);
   };
 
@@ -68,23 +55,8 @@ function App() {
           {!languageSelected && (
             <>
               <header className="App-header App-section">
-                <GameWrapper title="Select language">
-                  {/* <div className="language-selection">
-                  {languageList.map((language) => (
-                    <button
-                      key={language.value}
-                      className="nes-btn"
-                      value={language.value}
-                      onClick={selectLanguage}
-                    >
-                      <span role="img" aria-label={language.text}>
-                        {language.icon}
-                      </span>
-                      &nbsp;{language.text}
-                    </button>
-                  ))}
-                </div> */}
-                  <ModeSelector finished={startGame}></ModeSelector>
+                <GameWrapper title="Game Settings">
+                  <GameSettings i18n={i18n} finished={startGame}></GameSettings>
                 </GameWrapper>
               </header>
               <div className="App-section App-footer">

@@ -8,7 +8,7 @@ function HUD() {
   const { state } = useContext(RiddleContext);
 
   return (
-    <div className="hud-container">
+    <div className="section hud-container">
       <Timer type="clock"></Timer>
       <Score stars={state.score} />
     </div>
