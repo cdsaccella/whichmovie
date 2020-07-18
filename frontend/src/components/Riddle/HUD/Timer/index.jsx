@@ -29,7 +29,7 @@ function Timer({ seconds, type }) {
   }, [seconds]);
 
   useEffect(() => {
-    if (state.time === 0 && state.isPlaying) {
+    if (state.time <= 0 && state.isPlaying) {
       Log.trace("Dispatching TIMEOUT", Timer.name);
       dispatch({ type: SET_TIMEOUT });
     }
