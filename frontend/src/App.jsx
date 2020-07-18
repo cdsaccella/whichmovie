@@ -12,7 +12,7 @@ import { gameModeReducer } from "reducers/GameModeReducer";
 import { GAME_MODE_EMPTY_STATE } from "reducers/defaults";
 
 function App() {
-  // const [languageSelected, setLanguageSelected] = useState(false);
+  const [languageSelected, setLanguageSelected] = useState(false);
 
   const { t, i18n } = useTranslation();
 
@@ -30,10 +30,10 @@ function App() {
     GAME_MODE_EMPTY_STATE
   );
 
-  const selectLanguage = (e) => {
-    i18n.changeLanguage(e.target.value);
-    setLanguageSelected(true);
-  };
+  // const selectLanguage = (e) => {
+  //   i18n.changeLanguage(e.target.value);
+  //   setLanguageSelected(true);
+  // };
 
   const startGame = (e) => {
     setLanguageSelected(true);
