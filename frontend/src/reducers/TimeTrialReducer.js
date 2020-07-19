@@ -75,7 +75,8 @@ export const timeTrialInGameReducer = (state, action) => {
         ...state,
         resolved: true,
         isPlaying: false,
-        time: state.time - state.timeDiscount,
+        lives: state.lives - 1,
+        gameOver: state.lives === 0,
       };
     case SET_TIMEOUT:
       return {
@@ -83,6 +84,7 @@ export const timeTrialInGameReducer = (state, action) => {
         gameOver: true,
         resolved: true,
         isPlaying: false,
+        lives: state.lives - 1,
       };
     case SET_ERROR:
       return IN_GAME_EMPTY_STATE;

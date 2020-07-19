@@ -5,10 +5,11 @@ export const GAME_MODE_EMPTY_STATE = {
 };
 
 export const IN_GAME_EMPTY_STATE = {
+  timeDiscount: 0,
+  maxTime: 0,
   time: 0,
   lives: 0,
   score: 0,
-  timeDiscount: 0,
   isPlaying: false,
   riddle: {
     options: [],

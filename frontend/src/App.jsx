@@ -12,7 +12,7 @@ import gameModeReducer from "reducers/GameModeReducer";
 import { GAME_MODE_EMPTY_STATE } from "reducers/defaults";
 
 function App() {
-  const [languageSelected, setLanguageSelected] = useState(false);
+  const [gameStarted, setGameStarted] = useState(false);
 
   const { t, i18n } = useTranslation();
 
@@ -22,8 +22,7 @@ function App() {
   );
 
   const startGame = () => {
-    console.log("starting game");
-    setLanguageSelected(true);
+    setGameStarted(true);
   };
 
   useEffect(() => {
@@ -45,14 +44,14 @@ function App() {
           <title>Which movie?</title>
         </Helmet>
         <GameModeContext.Provider value={{ gameModeState, dispatchGameMode }}>
-          {languageSelected && (
+          {gameStarted && (
             <header className="App-header App-section">
               <GameWrapper title={t("Try it!")}>
                 <Riddle i18n={i18n} type="normalMode"></Riddle>
               </GameWrapper>
             </header>
           )}
-          {!languageSelected && (
+          {!gameStarted && (
             <>
               <header className="App-header App-section">
                 <GameWrapper title="Game Settings">

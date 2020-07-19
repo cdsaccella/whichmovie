@@ -44,7 +44,7 @@ export const classicModeInGameReducer = (state, action) => {
     case SET_SETTINGS:
       return {
         ...state,
-        time: action.payload.time,
+        maxTime: action.payload.time,
         lives: action.payload.lives,
       };
     case NEW_RIDDLE_REQUESTED:
@@ -52,6 +52,7 @@ export const classicModeInGameReducer = (state, action) => {
         ...state,
         isLoading: true,
         isPlaying: false,
+        time: state.maxTime,
       };
     case SET_CURRENT_RIDDLE:
       return {
@@ -71,23 +72,25 @@ export const classicModeInGameReducer = (state, action) => {
     case SET_WRONG_ANSWER:
       return {
         ...state,
-        gameOver: true,
+        gameOver: state.lives === 0,
         resolved: true,
         isPlaying: false,
+        lives: state.lives - 1,
       };
     case SET_TIMEOUT:
       return {
         ...state,
-        gameOver: true,
+        gameOver: state.lives === 0,
         resolved: true,
         isPlaying: false,
+        lives: state.lives - 1,
       };
     case SET_ERROR:
       return IN_GAME_EMPTY_STATE;
     case RESET_GAME:
       return {
         ...IN_GAME_EMPTY_STATE,
-        time: action.payload.time,
+        maxTime: action.payload.time,
         lives: action.payload.lives,
       };
     default:
