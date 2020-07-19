@@ -24,7 +24,7 @@ export const timeTrialModeDifficultyOptions = {
     lives: 3,
     options: 6,
     dimensions: 0,
-    timeCost: 3,
+    timeCost: 1,
   },
   hard: {
     time: 30,
@@ -75,8 +75,7 @@ export const timeTrialInGameReducer = (state, action) => {
         ...state,
         resolved: true,
         isPlaying: false,
-        lives: state.lives - 1,
-        gameOver: state.lives === 0,
+        time: state.time - state.timeDiscount,
       };
     case SET_TIMEOUT:
       return {
@@ -84,7 +83,6 @@ export const timeTrialInGameReducer = (state, action) => {
         gameOver: true,
         resolved: true,
         isPlaying: false,
-        lives: state.lives - 1,
       };
     case SET_ERROR:
       return IN_GAME_EMPTY_STATE;

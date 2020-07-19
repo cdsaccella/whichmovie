@@ -16,6 +16,9 @@ const gameModeReducer = (state, action) => {
         inGameReducer: classicModeInGameReducer,
         difficultyOptions: classicModeDifficultyOptions,
         difficulty: 'medium',
+        lives: true,
+        time: true,
+        score: true,
       };
     case SET_TIME_TRIAL_MODE:
       return {
@@ -24,6 +27,9 @@ const gameModeReducer = (state, action) => {
         inGameReducer: timeTrialInGameReducer,
         difficultyOptions: timeTrialModeDifficultyOptions,
         difficulty: 'medium',
+        lives: false,
+        time: true,
+        score: true,
       };
     default:
       return state;
