@@ -11,7 +11,10 @@ function HUD() {
   const { gameModeState } = useContext(GameModeContext);
 
   return (
-    <div className="section hud-container">
+    <div
+      className="section hud-container"
+      style={{ opacity: state.isPlaying ? 1 : 0.5 }}
+    >
       {gameModeState.time && <Timer type="clock"></Timer>}
       {gameModeState.lives && <Lives lives={state.lives} />}
       {gameModeState.score && <Score stars={state.score} />}
