@@ -25,6 +25,10 @@ function App() {
     setGameStarted(true);
   };
 
+  const backToMenu = () => {
+    setGameStarted(false);
+  };
+
   useEffect(() => {
     async function checkHealth() {
       const health = await fetch(`${process.env.REACT_APP_API_URL}/health`);
@@ -43,7 +47,9 @@ function App() {
           <meta charSet="utf-8" />
           <title>Which movie?</title>
         </Helmet>
-        <GameModeContext.Provider value={{ gameModeState, dispatchGameMode }}>
+        <GameModeContext.Provider
+          value={{ backToMenu, gameModeState, dispatchGameMode }}
+        >
           {gameStarted && (
             <header className="App-header App-section">
               <GameWrapper title={t("Try it!")}>

@@ -4,6 +4,7 @@ import { getNewRiddle } from "services/RiddleService.js";
 import Image from "./Image/index.jsx";
 import HUD from "./HUD/index.jsx";
 import Restart from "./Restart/index.jsx";
+import BackToMenu from "./BackToMenu/index.jsx";
 import "./styles.css";
 import {
   NEW_RIDDLE_REQUESTED,
@@ -68,6 +69,7 @@ function Riddle({ t, i18n, type }) {
             <Options></Options>
           </>
         )}
+        <BackToMenu></BackToMenu>
       </div>
     </RiddleContext.Provider>
   );

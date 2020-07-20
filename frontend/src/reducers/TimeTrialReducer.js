@@ -10,6 +10,7 @@ import {
   SET_SETTINGS,
 } from './types';
 import { IN_GAME_EMPTY_STATE } from './defaults';
+import Log from '../services/LogService';
 
 export const timeTrialModeDifficultyOptions = {
   easy: {
@@ -36,6 +37,7 @@ export const timeTrialModeDifficultyOptions = {
 };
 
 export const timeTrialInGameReducer = (state, action) => {
+  Log.info(action, 'Time Trial Mode In Game Reducer');
   switch (action.type) {
     case SET_TICK:
       return {
