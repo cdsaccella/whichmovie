@@ -18,6 +18,7 @@ const resources = {
       'Try to hit the best you can without losing': 'Try to hit the best you can without losing',
       'Time Trial Mode': 'Time Trial Mode',
       'Try to hit the best you can in the given time': 'Try to hit the best you can in the given time',
+      'Back to menu': 'Back to menu',
     },
   },
   es: {
@@ -34,6 +35,7 @@ const resources = {
       'Try to hit the best you can without losing': 'Intenta adivinar lo máximo que puedas sin perder',
       'Time Trial Mode': 'Modo Contrarreloj',
       'Try to hit the best you can in the given time': 'Intenta adivinar lo máximo que puedas en el tiempo dado',
+      'Back to menu': 'Volver al menú',
     },
   },
   de: {
@@ -50,6 +52,7 @@ const resources = {
       'Try to hit the best you can without losing': 'Versuchen Sie, das Beste zu geben, ohne zu verlieren',
       'Time Trial Mode': 'Zeitfahrmodus',
       'Try to hit the best you can in the given time': 'Versuchen Sie, das Beste zu erreichen, was Sie in der vorgegebenen Zeit können',
+      'Back to menu': 'Zurück zum Menü',
     },
   },
   fr: {
@@ -66,6 +69,7 @@ const resources = {
       'Try to hit the best you can without losing': 'Essayez de frapper du mieux que vous pouvez sans perdre',
       'Time Trial Mode': 'Mode contre la montre',
       'Try to hit the best you can in the given time': 'Essayez de frapper le mieux possible dans le temps imparti',
+      'Back to menu': 'Retour au menu',
     },
   },
   it: {
@@ -82,6 +86,7 @@ const resources = {
       'Try to hit the best you can without losing': 'Cerca di colpire il meglio che puoi senza perdere',
       'Time Trial Mode': 'Modalità prova a tempo',
       'Try to hit the best you can in the given time': 'Cerca di fare il meglio che puoi in un determinato momento',
+      'Back to menu': 'Torna al menu',
     },
   },
   zh: {
@@ -98,6 +103,7 @@ const resources = {
       'Try to hit the best you can without losing': '尝试在不损失的情况下尽力而为',
       'Time Trial Mode': '计时赛模式',
       'Try to hit the best you can in the given time': '尝试在给定的时间内达到最佳状态',
+      'Back to menu': '返回菜单',
     },
   },
 };

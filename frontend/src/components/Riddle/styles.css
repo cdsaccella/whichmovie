@@ -1,9 +1,10 @@
 .content-wrapper {
+  max-height: 100%;
   width: 100%;
   display: flex;
   justify-content: center;
   flex-direction: column;
-  margin-bottom: 20px !important;
+  padding-bottom: 20px !important;
 }
 
 .game-over-wrapper {
