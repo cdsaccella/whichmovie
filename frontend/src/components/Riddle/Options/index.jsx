@@ -29,7 +29,7 @@ function Options() {
   }, [state.riddle.options, state.isLoading]);
 
   return (
-    <div className="button-container">
+    <div className="section button-container">
       {options.map((option, index) => (
         <button
           key={option + index}

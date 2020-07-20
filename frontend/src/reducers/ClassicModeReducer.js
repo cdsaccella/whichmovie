@@ -12,32 +12,29 @@ import {
 import { IN_GAME_EMPTY_STATE } from './defaults';
 import Log from '../services/LogService';
 
-export const timeTrialModeDifficultyOptions = {
+export const classicModeDifficultyOptions = {
   easy: {
-    time: 120,
+    time: 60,
     lives: 5,
     options: 4,
     dimensions: 0,
-    timeCost: 1,
   },
   medium: {
-    time: 60,
+    time: 20,
     lives: 3,
     options: 6,
     dimensions: 0,
-    timeCost: 1,
   },
   hard: {
-    time: 30,
+    time: 10,
     lives: 1,
     options: 8,
     dimensions: 0,
-    timeCost: 5,
   },
 };
 
-export const timeTrialInGameReducer = (state, action) => {
-  Log.info(action, 'Time Trial Mode In Game Reducer');
+export const classicModeInGameReducer = (state, action) => {
+  Log.info(action, 'Classic Mode In Game Reducer');
   switch (action.type) {
     case SET_TICK:
       return {
@@ -47,15 +44,15 @@ export const timeTrialInGameReducer = (state, action) => {
     case SET_SETTINGS:
       return {
         ...state,
-        time: action.payload.time,
+        maxTime: action.payload.time,
         lives: action.payload.lives,
-        timeDiscount: action.payload.timeCost,
       };
     case NEW_RIDDLE_REQUESTED:
       return {
         ...state,
         isLoading: true,
         isPlaying: false,
+        time: state.maxTime,
       };
     case SET_CURRENT_RIDDLE:
       return {
@@ -75,25 +72,26 @@ export const timeTrialInGameReducer = (state, action) => {
     case SET_WRONG_ANSWER:
       return {
         ...state,
+        gameOver: state.lives === 0,
         resolved: true,
         isPlaying: false,
-        time: state.time - state.timeDiscount,
+        lives: state.lives - 1,
       };
     case SET_TIMEOUT:
       return {
         ...state,
-        gameOver: true,
+        gameOver: state.lives === 0,
         resolved: true,
         isPlaying: false,
+        lives: state.lives - 1,
       };
     case SET_ERROR:
       return IN_GAME_EMPTY_STATE;
     case RESET_GAME:
       return {
         ...IN_GAME_EMPTY_STATE,
-        time: action.payload.time,
+        maxTime: action.payload.time,
         lives: action.payload.lives,
-        timeDiscount: action.payload.timeCost,
       };
     default:
       return state;

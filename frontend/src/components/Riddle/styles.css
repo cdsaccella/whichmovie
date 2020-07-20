@@ -1,12 +1,9 @@
-.sections > div {
-  margin-bottom: 10px;
-}
-
 .content-wrapper {
   width: 100%;
   display: flex;
   justify-content: center;
   flex-direction: column;
+  margin-bottom: 20px !important;
 }
 
 .game-over-wrapper {
@@ -14,14 +11,4 @@
   display: flex;
   justify-content: center;
   flex-direction: column;
-}
-
-@media (max-width: 600px) {
-  .nes-container {
-    padding: 1.5rem 0rem !important;
-  }
-
-  .sections > div {
-    padding: 0rem 1rem;
-  }
 }

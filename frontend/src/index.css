@@ -2,3 +2,15 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+.mar-ver {
+  margin: 10px 0;
+}
+
+.mar-top {
+  margin-top: 20px;
+}
+
+.mar-bottom {
+  margin-bottom: 20px;
+}

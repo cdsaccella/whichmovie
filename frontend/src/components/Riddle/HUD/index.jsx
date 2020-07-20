@@ -1,16 +1,20 @@
 import React, { useContext } from "react";
 import RiddleContext from "context/RiddleContext.js";
+import GameModeContext from "context/GameModeContext";
 import Score from "./Score/index.jsx";
 import Timer from "./Timer/index.jsx";
+import Lives from "./Lives/index.jsx";
 import "./styles.css";
 
 function HUD() {
-  const { state, settings } = useContext(RiddleContext);
+  const { state } = useContext(RiddleContext);
+  const { gameModeState } = useContext(GameModeContext);
 
   return (
-    <div className="hud-container">
-      <Timer seconds={settings.timePerRiddle} type="clock"></Timer>
-      <Score stars={state.score} />
+    <div className="section hud-container">
+      {gameModeState.time && <Timer type="clock"></Timer>}
+      {gameModeState.lives && <Lives lives={state.lives} />}
+      {gameModeState.score && <Score stars={state.score} />}
     </div>
   );
 }

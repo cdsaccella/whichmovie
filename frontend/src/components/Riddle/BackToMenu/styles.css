@@ -1,0 +1,13 @@
+.back-button {
+  width: auto;
+  position: absolute !important;
+  font-size: 12px;
+  left: -4px;
+  bottom: -4px;
+}
+
+@media (max-width: 600px) {
+  .back-button {
+    width: 100%;
+  }
+}

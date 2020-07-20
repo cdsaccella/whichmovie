@@ -27,6 +27,10 @@
   flex-direction: column;
 }
 
+.nes-container .section {
+  margin-bottom: 10px;
+}
+
 @media (max-width: 600px) {
   .App-section {
     padding: 0.5rem;
@@ -41,5 +45,13 @@
     padding: 0 2rem;
     flex-direction: column;
     height: 100%;
+  }
+
+  .nes-container {
+    padding: 1.5rem 0rem !important;
+  }
+
+  .nes-container .section {
+    padding: 0rem 1rem;
   }
 }
