@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { withTranslation } from "react-i18next";
 import "./styles.css";
 
@@ -12,9 +12,13 @@ function OptionsSelector({
 }) {
   const [selectedOption, setSelectedOption] = useState(defaultOption);
 
+  useEffect(() => {
+    setSelectedOption(defaultOption);
+  }, [defaultOption]);
+
   return (
     <div className="section option-selector-container">
-      <p>{title}</p>
+      {title && <p className="mar-top">{title}</p>}
       <div className="options-container">
         {options.map((option) => (
           <div key={option.action}>

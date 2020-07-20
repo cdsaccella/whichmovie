@@ -54,7 +54,7 @@ function App() {
           {!gameStarted && (
             <>
               <header className="App-header App-section">
-                <GameWrapper title="Game Settings">
+                <GameWrapper title={t("Game settings")}>
                   <GameSettings i18n={i18n} finished={startGame}></GameSettings>
                 </GameWrapper>
               </header>

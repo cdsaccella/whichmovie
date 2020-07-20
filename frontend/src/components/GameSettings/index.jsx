@@ -35,7 +35,6 @@ function GameSettings({ finished, i18n, t }) {
   };
 
   const SELECT_LANGUAGE = {
-    title: t("Select language"),
     options: [
       { icon: "🇩🇪", label: "Deutsch", action: "de" },
       { icon: "🇬🇧", label: "English", action: "en" },
@@ -67,7 +66,7 @@ function GameSettings({ finished, i18n, t }) {
         (option, index) =>
           currentStep === index && (
             <OptionsSelector
-              key={option.title}
+              key={option.action + index}
               {...option}
               selectOption={(action) => next(option.dispatcher, action)}
             ></OptionsSelector>

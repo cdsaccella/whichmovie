@@ -18,10 +18,6 @@
   align-self: flex-end;
 }
 
-.option-description {
-  margin-top: 20px;
-}
-
 @media (max-width: 600px) {
   .options-container {
     width: 100%;

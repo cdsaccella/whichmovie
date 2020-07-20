@@ -91,6 +91,7 @@ export const timeTrialInGameReducer = (state, action) => {
         ...IN_GAME_EMPTY_STATE,
         time: action.payload.time,
         lives: action.payload.lives,
+        timeDiscount: action.payload.timeCost,
       };
     default:
       return state;
