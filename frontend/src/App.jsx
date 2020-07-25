@@ -10,6 +10,7 @@ import GameWrapper from "./components/GameWrapper/index.jsx";
 import GameModeContext from "context/GameModeContext.js";
 import gameModeReducer from "reducers/GameModeReducer";
 import { GAME_MODE_EMPTY_STATE } from "reducers/defaults";
+import FacebookLogin from "react-facebook-login";
 
 function App() {
   const [gameStarted, setGameStarted] = useState(false);
@@ -39,6 +40,10 @@ function App() {
     );
     checkHealth();
   }, []);
+
+  const responseFacebook = (response) => {
+    console.log(response);
+  };
 
   return (
     <HelmetProvider>
@@ -71,6 +76,13 @@ function App() {
           )}
         </GameModeContext.Provider>
       </div>
+      <FacebookLogin
+        appId="308001300351911"
+        autoLoad={true}
+        fields="name,email,picture"
+        onClick={() => alert("hola")}
+        callback={responseFacebook}
+      />
     </HelmetProvider>
   );
 }
