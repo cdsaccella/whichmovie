@@ -1,6 +1,12 @@
 import {
   SET_CLASSIC_MODE,
   SET_TIME_TRIAL_MODE,
+  EASY,
+  NORMAL,
+  HARD,
+  SET_EASY_MODE,
+  SET_NORMAL_MODE,
+  SET_HARD_MODE,
 } from './types';
 import { classicModeDifficultyOptions, classicModeInGameReducer } from './ClassicModeReducer';
 import { timeTrialModeDifficultyOptions, timeTrialInGameReducer } from './TimeTrialReducer';
@@ -15,7 +21,7 @@ const gameModeReducer = (state, action) => {
         title: 'Classic Mode',
         inGameReducer: classicModeInGameReducer,
         difficultyOptions: classicModeDifficultyOptions,
-        difficulty: 'medium',
+        difficulty: NORMAL,
         lives: true,
         time: true,
         score: true,
@@ -26,10 +32,25 @@ const gameModeReducer = (state, action) => {
         title: 'Time Trial Mode',
         inGameReducer: timeTrialInGameReducer,
         difficultyOptions: timeTrialModeDifficultyOptions,
-        difficulty: 'medium',
+        difficulty: NORMAL,
         lives: false,
         time: true,
         score: true,
+      };
+    case SET_EASY_MODE:
+      return {
+        ...state,
+        difficulty: EASY,
+      };
+    case SET_NORMAL_MODE:
+      return {
+        ...state,
+        difficulty: NORMAL,
+      };
+    case SET_HARD_MODE:
+      return {
+        ...state,
+        difficulty: HARD,
       };
     default:
       return state;

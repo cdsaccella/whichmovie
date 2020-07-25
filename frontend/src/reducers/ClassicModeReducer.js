@@ -16,20 +16,14 @@ export const classicModeDifficultyOptions = {
   easy: {
     time: 60,
     lives: 5,
-    options: 4,
-    dimensions: 0,
   },
-  medium: {
+  normal: {
     time: 20,
     lives: 3,
-    options: 6,
-    dimensions: 0,
   },
   hard: {
     time: 10,
-    lives: 1,
-    options: 8,
-    dimensions: 0,
+    lives: 0,
   },
 };
 
