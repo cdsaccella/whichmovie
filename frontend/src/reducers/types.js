@@ -1,6 +1,9 @@
-export const SET_EASY = 'SET_EASY';
-export const SET_NORMAL = 'SET_NORMAL';
-export const SET_HARD = 'SET_HARD';
+export const EASY = 'easy';
+export const NORMAL = 'normal';
+export const HARD = 'hard';
+export const SET_EASY_MODE = 'easy';
+export const SET_NORMAL_MODE = 'normal';
+export const SET_HARD_MODE = 'hard';
 
 export const NEW_RIDDLE_REQUESTED = 'NEW_RIDDLE_REQUESTED';
 export const SET_CURRENT_RIDDLE = 'SET_CURRENT_RIDDLE';

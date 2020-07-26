@@ -4,7 +4,7 @@ import { Helmet, HelmetProvider } from "react-helmet-async";
 import Riddle from "components/Riddle/index.jsx";
 import GameSettings from "components/GameSettings/index.jsx";
 import References from "components/References/index.jsx";
-import "i18n";
+import "i18n/i18n";
 import "./App.css";
 import GameWrapper from "./components/GameWrapper/index.jsx";
 import GameModeContext from "context/GameModeContext.js";

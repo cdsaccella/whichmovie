@@ -16,22 +16,16 @@ export const timeTrialModeDifficultyOptions = {
   easy: {
     time: 120,
     lives: 5,
-    options: 4,
-    dimensions: 0,
     timeCost: 1,
   },
-  medium: {
+  normal: {
     time: 60,
     lives: 3,
-    options: 6,
-    dimensions: 0,
     timeCost: 1,
   },
   hard: {
     time: 30,
     lives: 1,
-    options: 8,
-    dimensions: 0,
     timeCost: 5,
   },
 };

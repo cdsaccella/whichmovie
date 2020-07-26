@@ -1,8 +1,10 @@
 import React, { useContext, useState, useEffect } from "react";
 import GameModeContext from "context/GameModeContext.js";
-import { SET_CLASSIC_MODE, SET_TIME_TRIAL_MODE } from "reducers/types";
 import OptionsSelector from "./OptionsSelector/index.jsx";
 import { withTranslation } from "react-i18next";
+import optionsLanguage from "./optionsLanguage.js";
+import optionsGameMode from "./optionsGameMode.js";
+import optionsDifficulty from "./optionsDifficulty.js";
 
 function GameSettings({ finished, i18n, t }) {
   const [currentStep, setCurrentStep] = useState(0);
@@ -16,38 +18,11 @@ function GameSettings({ finished, i18n, t }) {
     dispatchGameMode({ type: value });
   };
 
-  const SELECT_GAME_MODE = {
-    title: t("Choose the mode you want to play"),
-    options: [
-      {
-        label: t("Classic Mode"),
-        action: SET_CLASSIC_MODE,
-        description: t("Try to hit the best you can without losing"),
-      },
-      {
-        label: t("Time Trial Mode"),
-        action: SET_TIME_TRIAL_MODE,
-        description: t("Try to hit the best you can in the given time"),
-      },
-    ],
-    defaultOption: SET_CLASSIC_MODE,
-    dispatcher: dispatchGameModeAction,
-  };
-
-  const SELECT_LANGUAGE = {
-    options: [
-      { icon: "🇩🇪", label: "Deutsch", action: "de" },
-      { icon: "🇬🇧", label: "English", action: "en" },
-      { icon: "🇪🇸", label: "Español", action: "es" },
-      { icon: "🇫🇷", label: "Français", action: "fr" },
-      { icon: "🇮🇹", label: "Italiano", action: "it" },
-      { icon: "🇨🇳", label: "普通话", action: "zh" },
-    ],
-    defaultOption: "en",
-    dispatcher: selectLanguage,
-  };
-
-  const options = [SELECT_LANGUAGE, SELECT_GAME_MODE];
+  const options = [
+    optionsLanguage(t, selectLanguage),
+    optionsGameMode(t, dispatchGameModeAction),
+    optionsDifficulty(t, dispatchGameModeAction),
+  ];
 
   const next = (dispatcher, action) => {
     dispatcher(action);

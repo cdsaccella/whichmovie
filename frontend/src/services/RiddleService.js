@@ -6,8 +6,12 @@ export const NO_RIDDLE = {
   options: [],
 };
 
-export const getNewRiddle = async (language = 'en-US') => {
-  const result = await fetch(`${process.env.REACT_APP_API_URL}/riddles/${language}`);
+export const getNewRiddle = async (language = 'en-US', difficulty = 'normal') => {
+  const params = {
+    lang: language,
+    mode: difficulty,
+  }
+  const result = await fetch(`${process.env.REACT_APP_API_URL}/riddles?${paramsToString(params)}`);
   const jsonResult = await result.json();
   return {
     id: jsonResult.data.riddle,
@@ -31,3 +35,5 @@ export const assertRiddle = async (riddle, option) => {
   const jsonResult = await result.json();
   return jsonResult.data.result;
 };
+
+const paramsToString = (params) => new URLSearchParams(params).toString()
