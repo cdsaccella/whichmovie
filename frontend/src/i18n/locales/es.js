@@ -12,6 +12,14 @@ const es = {
   'Time Trial Mode': 'Modo Contrarreloj',
   'Try to hit the best you can in the given time': 'Intenta adivinar lo máximo que puedas en el tiempo dado',
   'Back to menu': 'Volver al menú',
+  'Choose the difficulty you want to play': 'Elige la dificultad con la que desees jugar',
+  'Easy': 'Fácil',
+  'You do not so much about movies': 'No sabés mucho acerca de películas',
+  'Normal': 'Normal',
+  'You don\'t not about what to do with your life': 'No sabés siquiera qué hacer con tu vida',
+  'Hard': 'Difícil',
+  'You are a really movie buff': 'Eres un verdadero cinéfilo',
 };
 
 export default es;
+
