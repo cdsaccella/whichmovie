@@ -13,7 +13,7 @@ const MODES = {
   },
   normal: {
     pageSizeLookUp: 100,
-    optionsSize: 4,
+    optionsSize: 6,
   },
   hard: {
     pageSizeLookUp: 200,

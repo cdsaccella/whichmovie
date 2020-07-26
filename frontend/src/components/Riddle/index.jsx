@@ -27,11 +27,11 @@ function Riddle({ t, i18n, type }) {
   const loadNewRiddle = useCallback(() => {
     Log.trace("Calling new riddle", Riddle.name);
     dispatch({ type: NEW_RIDDLE_REQUESTED });
-    getNewRiddle(i18n.language).then((riddle) => {
+    getNewRiddle(i18n.language, gameModeState.difficulty).then((riddle) => {
       Log.trace("Getting new riddle", Riddle.name);
       dispatch({ type: SET_CURRENT_RIDDLE, payload: riddle });
     });
-  }, [i18n.language, dispatch]);
+  }, [i18n.language, gameModeState.difficulty, dispatch]);
 
   // get new riddle at start
   useEffect(() => {
