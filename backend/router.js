@@ -6,15 +6,15 @@ import postRiddle from './controllers/riddle/post.js'
 const router = new Router();
 
 router.get('/', ({ response }) => {
-    response.body = 'You shouldn\'t be here, but meh...';
+  response.body = 'You shouldn\'t be here, but meh...';
 });
 
 router.get('/health', ({ response }) => {
-    response.body = "Don't worry, I'm alive.";
+  response.body = "Don't worry, I'm alive.";
 });
 
 router
-    .get('/riddles/:lang', getRiddle)
-    .post("/riddles", postRiddle);
+  .get('/riddles', getRiddle)
+  .post("/riddles", postRiddle);
 
 export default router;
