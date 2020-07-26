@@ -48,7 +48,7 @@ const getMovieToRiddle = async (language, mode) => {
       movie: randomMovie,
       relatedMovies: relatedMovies,
     }
-  return await getMovieToRiddle(language);
+  return await getMovieToRiddle(language, mode);
 }
 
 const getFirst = (array) => {
