@@ -6,7 +6,9 @@
     "start": "netlify-lambda serve ."
   },
   "dependencies": {
-    "jimp": "^0.14.0"
+    "jimp": "^0.14.0",
+    "node-fetch": "^2.6.0",
+    "sha256": "^0.2.0"
   },
   "devDependencies": {
     "netlify-lambda": "^1.6.3"

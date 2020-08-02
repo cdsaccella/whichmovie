@@ -1,9 +1,9 @@
 const imageStorageUrl = 'https://image.tmdb.org/t/p/';
 
-export const getOriginalImage = (relativePath) => {
+exports.getOriginalImage = (relativePath) => {
   return `${imageStorageUrl}original${relativePath}`;
 };
 
-export const getResizedImage = (relativePath, desiredSize) => {
+exports.getResizedImage = (relativePath, desiredSize) => {
   return `${imageStorageUrl}w${desiredSize}${relativePath}`;
 };

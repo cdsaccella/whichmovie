@@ -11,7 +11,7 @@ export const getNewRiddle = async (language = 'en-US', difficulty = 'normal') =>
     lang: language,
     mode: difficulty,
   }
-  const result = await fetch(`${process.env.REACT_APP_API_URL}/riddles?${paramsToString(params)}`);
+  const result = await fetch(`${process.env.REACT_APP_RIDDLE_URL}?${paramsToString(params)}`);
   const jsonResult = await result.json();
   return {
     id: jsonResult.data.riddle,
@@ -25,7 +25,7 @@ export const assertRiddle = async (riddle, option) => {
     riddle,
     option,
   };
-  const result = await fetch(`${process.env.REACT_APP_API_URL}/riddles`, {
+  const result = await fetch(`${process.env.REACT_APP_ASSERT_RIDDLE_URL}`, {
     method: 'POST',
     body: JSON.stringify(data),
     headers: {
