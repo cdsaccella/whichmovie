@@ -35,7 +35,7 @@ exports.getNewRiddle = async (language, modeKey) => {
   }
 }
 
-const checkOption = (riddle, option) => {
+exports.checkOption = (riddle, option) => {
   return assertEncryptedText(option, riddle);
 }
 
