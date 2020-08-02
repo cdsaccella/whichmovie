@@ -29,15 +29,3 @@ jobs:
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
         run: npx netlify-cli deploy --dir=build --prod --functions=../functions
-  backend:
-    name: api deployment
-    runs-on: ubuntu-latest
-    steps:
-      - name: checkout
-        uses: actions/checkout@v2
-      - name: deploy
-        uses: superfly/flyctl-actions@master
-        env:
-          FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
-        with:
-          args: "deploy backend --config fly.toml"

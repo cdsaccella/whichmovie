@@ -1,9 +1,5 @@
-
-if (!process.env.AWS_EXECUTION_ENV) {
-  var Jimp = require('jimp').default;
-} else {
-  var Jimp = require('jimp');
-}
+var Jimp = require('jimp');
+const fetch = require("node-fetch");
 
 const DEFAULT_CONFIG = {
   PIXEL: 4,
@@ -41,10 +37,7 @@ exports.handler = function (event, context, callback) {
       image.getBufferAsync('image/png').then(image => {
         callback(null, {
           statusCode: 200,
-          headers:
-          {
-            "Content-Type": "image/png"
-          },
+          headers: { "Content-Type": "image/png" },
           body: image.toString('base64'),
           isBase64Encoded: true
         });

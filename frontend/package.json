@@ -23,7 +23,8 @@
     "eject": "react-scripts eject",
     "lint": "eslint src/",
     "lint:fix": "eslint src/ --fix",
-    "deploy": "react-scripts build && netlify deploy"
+    "deploy": "react-scripts build && netlify deploy",
+    "net-dev": "netlify dev --functions ../functions"
   },
   "eslintConfig": {
     "extends": "react-app"

@@ -1,7 +1,7 @@
-import { getSimilars } from "./movieService.js";
-import { getPopularMovies } from "./movieService.js";
-import { getResizedImage } from "./imageService.js";
-import { getEncryptedText, assertEncryptedText } from "./cryptoService.js";
+const { getSimilars } = require("./movieService");
+const { getPopularMovies } = require("./movieService");
+const { getResizedImage } = require("./imageService");
+const { getEncryptedText, assertEncryptedText } = require("./cryptoService");
 
 const IMAGE_SIZE = 500;
 
@@ -21,7 +21,7 @@ const MODES = {
   }
 }
 
-export const getNewRiddle = async (language, modeKey) => {
+exports.getNewRiddle = async (language, modeKey) => {
   const mode = modeKey in MODES ? MODES[modeKey] : MODES[DEFAULT_MODE];
   const { movie, relatedMovies } = await getMovieToRiddle(language, mode);
   let relatedMoviesOptions = [];
@@ -35,7 +35,7 @@ export const getNewRiddle = async (language, modeKey) => {
   }
 }
 
-export const checkOption = (riddle, option) => {
+const checkOption = (riddle, option) => {
   return assertEncryptedText(option, riddle);
 }
 

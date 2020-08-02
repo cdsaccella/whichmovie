@@ -6,6 +6,12 @@ which movie is it
 
 `docker-compose up`
 
+# Run netlify dev environment
+
+Inside frontend folder:
+
+`yarn net-dev`
+
 Try it:
 
 - https://whichmovie.netlify.app
