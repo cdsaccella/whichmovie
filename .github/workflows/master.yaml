@@ -19,7 +19,7 @@ jobs:
         run: yarn install
       - name: install functions deps
         run: yarn install
-        working-directory: functions
+        working-directory: frontend/functions
       - name: tests
         run: yarn test
       - name: build
@@ -28,4 +28,4 @@ jobs:
         env:
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
-        run: npx netlify-cli deploy --dir=build --prod --functions=../functions
+        run: npx netlify-cli deploy --dir=build --prod
