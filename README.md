@@ -15,4 +15,3 @@ Inside frontend folder:
 Try it:
 
 - https://whichmovie.netlify.app
-- https://whichmovie.fly.dev
