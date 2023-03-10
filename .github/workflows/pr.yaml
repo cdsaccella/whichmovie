@@ -13,7 +13,7 @@ jobs:
       run:
         working-directory: frontend
     steps:
-      - name: Setup Node.js
+      - name: setup node version
         uses: actions/setup-node@v2
         with:
           node-version: "16.x"
